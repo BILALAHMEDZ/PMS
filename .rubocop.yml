@@ -1,3 +1,7 @@
+AllCops:
+ Exclude:
+   - config/environments/development.rb
+   - config/initializers/devise.rb
 Style/MixinUsage:
  Exclude:
    - bin/setup
@@ -17,3 +21,6 @@ Style/BracesAroundHashParameters:
  Enabled: false
 Metrics/LineLength:
  Max: 120
+Metrics/MethodLength:
+ Exclude:
+   - db/**/*
