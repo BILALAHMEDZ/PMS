@@ -1,0 +1,26 @@
+
+<% title "-All Users" %>
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><strong>Name</strong></th>
+        <th><strong>status</strong></th>
+        <th><strong>type</strong></th>
+        <th><strong>Email</strong></th>
+      </tr>
+    </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.status %></td>
+        <td><%= user.type %></td>
+        <td><%= user.email %></td>
+        <div class="btn_group">
+        </div>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+</div>
