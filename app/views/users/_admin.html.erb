@@ -1,0 +1,29 @@
+<% title "-All Users" %>
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><strong>Name</strong></th>
+        <th><strong>Status</strong></th>
+        <th><strong>Type</strong></th>
+        <th><strong>Email</strong></th>
+        <th><strong>Option</strong></th>
+      </tr>
+    </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.status %></td>
+        <td><%= user.type %></td>
+        <td><%= user.email %></td>
+        <div class="btn_group">
+        <td>
+        <%= link_to 'Edit', edit_user_path(user) , class: 'btn btn-primary  btn-success' %>
+        </td>
+      </div>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+</div>
