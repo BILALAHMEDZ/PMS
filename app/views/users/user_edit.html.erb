@@ -1,6 +1,7 @@
 <% title "-Edit User" %>
 <div class="container">
 <%= form_with(model: @user, :url => {:action => 'user_update'}, class: 'form-vertical' , local: true) do |f| %>
+    <%= render 'errors', user: @user %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name ,class: "form-control"%>

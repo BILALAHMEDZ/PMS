@@ -9,35 +9,35 @@
   </head>
   <body>
     <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">PMS</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="
-      navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse">
-        <ul class="navbar-nav mr-auto">
-        </ul>
-        <%if !user_signed_in? %>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <%= link_to 'Login', new_user_session_path ,class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link' %>
-            </li>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">PMS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="
+        navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse">
+          <ul class="navbar-nav mr-auto">
           </ul>
-        <% else %>
-          <ul class="navbar-nav">
-            <li class="nav-item"><%= link_to("Logout",destroy_user_session_path,  :method => :delete ,class: 'nav-link' )%>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Edit', edit_user_registration_path ,class: 'nav-link' %>
-            </li>
+          <%if !user_signed_in? %>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <%= link_to 'Login', new_user_session_path ,class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link' %>
+              </li>
             </ul>
-        <% end %>
-      </div>
-    </nav>
+          <% else %>
+            <ul class="navbar-nav">
+              <li class="nav-item"><%= link_to("Logout",destroy_user_session_path,  :method => :delete ,class: 'nav-link' )%>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Edit Profile', edit_profile_path(current_user) ,class: 'nav-link' %>
+              </li>
+              </ul>
+          <% end %>
+      </nav>
+    </div>
     <%= yield %>
     <div class="container">
       <p class="notice"><%= notice %></p>

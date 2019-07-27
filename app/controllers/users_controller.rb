@@ -8,11 +8,26 @@ class UsersController < ApplicationController
   end
 
   def user_edit
-    @user = User.find(params[:id])
+    find_user
+  end
+
+  def profile_edit
+    find_user
+  end
+
+  def profile_update
+    find_user
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to userslist_path, notice: 'User was successfully updated.' }
+      else
+        format.html { render :profile_edit }
+      end
+    end
   end
 
   def user_update
-    @user = User.find(params[:id])
+    find_user
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to userslist_path, notice: 'User was successfully updated.' }
@@ -26,6 +41,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(klass.to_s.underscore).permit(:name, :status, :type, :email)
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 
   def klass
