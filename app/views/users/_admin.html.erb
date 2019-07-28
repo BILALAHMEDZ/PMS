@@ -20,6 +20,7 @@
         <div class="btn_group">
         <td>
         <%= link_to 'Edit', edit_user_path(user) , class: 'btn btn-primary  btn-success' %>
+        <%= link_to 'Delete', destroy_user_path(user) , method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-success' , id: 'delete' %></td>
         </td>
       </div>
       </tr>

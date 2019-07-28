@@ -10,7 +10,7 @@
   <body>
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">PMS</a>
+        <%= link_to 'PMS', root_path ,class: 'nav-link' %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="
           navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -33,10 +33,10 @@
             <ul class="navbar-nav mr-auto">
             </ul>
             <ul class="navbar-nav">
-              <li class="nav-item"><%= link_to("Logout",destroy_user_session_path,  :method => :delete ,class: 'nav-link' )%>
-              </li>
               <li class="nav-item">
                 <%= link_to 'Edit Profile', edit_profile_path(current_user) ,class: 'nav-link' %>
+              </li>
+              <li class="nav-item"><%= link_to("Logout",destroy_user_session_path,  :method => :delete ,class: 'nav-link' )%>
               </li>
             </ul>
           <% else %>
