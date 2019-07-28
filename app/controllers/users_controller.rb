@@ -38,11 +38,11 @@ class UsersController < ApplicationController
   end
 
   def destroy_user
-   find_user
-   @user.destroy
-   respond_to do |format|
-     format.html { redirect_to userslist_path, notice: 'User was successfully destroyed.' }
-   end
+    find_user
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to userslist_path, notice: 'User was successfully destroyed.' }
+    end
   end
 
   private

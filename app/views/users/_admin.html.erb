@@ -10,21 +10,20 @@
         <th><strong>Option</strong></th>
       </tr>
     </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.status %></td>
-        <td><%= user.type %></td>
-        <td><%= user.email %></td>
-        <div class="btn_group">
-        <td>
-        <%= link_to 'Edit', edit_user_path(user) , class: 'btn btn-primary  btn-success' %>
-        <%= link_to 'Delete', destroy_user_path(user) , method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-success' , id: 'delete' %></td>
-        </td>
-      </div>
-      </tr>
-    <% end %>
-  </tbody>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.status %></td>
+          <td><%= user.type %></td>
+          <td><%= user.email %></td>
+          <div class="btn_group">
+          <td>
+          <%= link_to 'Edit', edit_user_path(user) , class: 'btn btn-primary  btn-success' %>
+          <%= link_to 'Delete', destroy_user_path(user) , method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-success' , id: 'delete' %></td>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>
