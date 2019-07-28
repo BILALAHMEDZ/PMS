@@ -19,8 +19,8 @@
           <td><%= user.email %></td>
           <div class="btn_group">
           <td>
-          <%= link_to 'Edit', edit_user_path(user) , class: 'btn btn-primary  btn-success' %>
-          <%= link_to 'Delete', destroy_user_path(user) , method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-success' , id: 'delete' %></td>
+          <%= link_to 'Edit', edit_user_path(user) , class: 'btn btn-primary fa fa-pencil' %>
+          <%= link_to 'Delete', destroy_user_path(user) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
           </td>
         </tr>
       <% end %>
