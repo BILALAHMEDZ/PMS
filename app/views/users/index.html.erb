@@ -1,7 +1,0 @@
-<% if current_user.type == "Admin" %>
-    <%= link_to 'Users', userslist_path , class: 'btn btn-primary btn-success' %>
-<% elsif current_user.type == "Manager" %>
-    <p>I'm a Manager</p>
-<% else %>
-    <p>I'm a User</p>
-<% end %>
