@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index; end
 
   def users_list
-    @users = User.all_except(current_user)
+    @users = User.order(:id).page(params[:page]).all_except(current_user)
   end
 
   def user_edit

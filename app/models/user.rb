@@ -6,6 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :name, presence: true
+  paginates_per 5
   scope :all_except, ->(user) { where.not(id: user) }
   TYPE_ADMIN = 'Admin'
   TYPE_MANAGER = 'Manager'
