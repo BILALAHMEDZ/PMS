@@ -1,4 +1,5 @@
 <% title "-All Users" %>
+<div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div>
 <div class="container">
   <table class="table table-striped" id="myTable">
     <thead>
@@ -19,13 +20,13 @@
           <td><%= user.email %></td>
           <div class="btn_group">
           <td>
-          <%= link_to 'Edit', edit_admin_user_path(user) , class: 'btn btn-primary fa fa-pencil' %>
-          <%= link_to 'Delete', admin_destroy_user_path(user) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+          <%= link_to '', edit_admin_user_path(user) , class: 'btn btn-primary fa fa-pencil' %>
+          <%= link_to '', admin_destroy_user_path(user) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to 'Create new User', new_admin_user_path , class: 'btn btn-primary fa fa-plus-square' %>
+  <%= link_to 'Add User', new_admin_user_path , class: 'btn btn-primary fa fa-plus-square' %>
   <%= paginate @users %>
 </div>

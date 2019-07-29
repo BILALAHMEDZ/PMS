@@ -11,7 +11,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to userslist_path, notice: 'User was successfully updated.' }
+        if current_user.type == 'Admin'
+          format.html { redirect_to admin_users_path, notice: 'User was successfully updated.' }
+        elsif current_user.type == 'User'
+          format.html { redirect_to root_path, notice: 'User was successfully updated.' }
+        elsif current_user.type == 'User'
+          format.html { redirect_to root_path, notice: 'User was successfully updated.' }
+        end
       else
         format.html { render :profile_edit }
       end

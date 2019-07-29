@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   rescue_from Pundit::NotAuthorizedError, with: :unauthorized_user
   include Pundit
+  protect_from_forgery
 
   def after_sign_in_path_for(_resource)
     if current_user.type == 'Admin'
