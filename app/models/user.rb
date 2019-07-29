@@ -15,6 +15,22 @@ class User < ApplicationRecord
   STATUS_DISABLED = 'Disabled'
   after_initialize :init_default
 
+  def admin?
+    type == 'Admin'
+  end
+
+  def user?
+    type == 'User'
+  end
+
+  def manager?
+    type == 'Manager'
+  end
+
+  def active_for_authentication?
+    super && status == 'Enabled'
+  end
+
   private
 
   def init_default
