@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  def index; end
+  def index
+    if current_user.type == 'Admin'
+      redirect_to admin_users_path
+    elsif current_user.type == 'User'
+      root_path
+    end
+  end
 
   def profile_edit
     @user = User.find(params[:id])

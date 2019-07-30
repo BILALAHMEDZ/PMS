@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :manager do
+    get 'clients/index'
+  end
+  namespace :admin do
+    get 'clients/index'
+  end
   namespace :admin do
     get 'user/:id/edit', to: 'users#edit', as: :edit_user
     delete 'user/:id/destroy', to: 'users#destroy', as: :destroy_user
