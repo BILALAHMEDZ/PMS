@@ -2,7 +2,7 @@
 
 class Manager::ClientsController < ManagerBaseController
   def index
-    @clients = Client.order(:id).page(params[:page])
+    @clients = Client.search(params[:search]).order(:id).page(params[:page])
   end
 
   def new

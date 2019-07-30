@@ -2,7 +2,7 @@
 
 class Admin::UsersController < AdminBaseController
   def index
-    @users = User.order(:id).page(params[:page]).all_except(current_user)
+    @users = User.search(params[:search]).order(:id).page(params[:page]).all_except(current_user)
   end
 
   def new
