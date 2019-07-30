@@ -2,15 +2,16 @@
 
 Rails.application.routes.draw do
   namespace :manager do
-    get 'clients/index'
+    resources :clients
+    delete 'user/:id/destroy_client', to: 'clients#destroy', as: :destroy_client
   end
-  namespace :admin do
-    get 'clients/index'
-  end
+
   namespace :admin do
     get 'user/:id/edit', to: 'users#edit', as: :edit_user
     delete 'user/:id/destroy', to: 'users#destroy', as: :destroy_user
+    delete 'user/:id/destroy_client', to: 'clients#destroy', as: :destroy_client
     resources :users
+    resources :clients
   end
   root 'users#index'
   devise_for :users

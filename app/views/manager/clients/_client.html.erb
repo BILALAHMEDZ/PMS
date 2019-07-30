@@ -1,0 +1,30 @@
+<% title "-All Clients" %>
+<div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div>
+<div class="container">
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th><strong>Name</strong></th>
+        <th><strong>Phone</strong></th>
+        <th><strong>Email</strong></th>
+        <th><strong>Actions</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @clients.each do |client| %>
+        <tr>
+          <td><%= client.name %></td>
+          <td><%= client.phone %></td>
+          <td><%= client.email %></td>
+          <div class="btn_group">
+          <td>
+          <%= link_to '', edit_manager_client_path(client) , class: 'btn btn-primary fa fa-pencil' %>
+          <%= link_to '', manager_destroy_client_path(client) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Add Client', new_manager_client_path , class: 'btn btn-primary fa fa-plus-square' %>
+  <%= paginate @clients %>
+</div>

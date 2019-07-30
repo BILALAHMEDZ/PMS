@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(_resource)
     if current_user.type == 'Admin'
       admin_users_url
+    elsif current_user.type == 'Manager'
+      manager_clients_url
     else
       root_url
     end
@@ -26,6 +28,12 @@ class ApplicationController < ActionController::Base
 
   def unauthorized_user
     flash[:alert] = 'You are not authorized to perform this action.'
-    redirect_to(request.referrer || root_path)
+    if current_user.type == 'Admin'
+      redirect_to(request.referrer || admin_clients_path)
+    elsif current_user.type == 'Manager'
+      redirect_to(request.referrer || manager_clients_path)
+    else
+      root_url
+    end
   end
 end

@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   def index
     if current_user.type == 'Admin'
       redirect_to admin_users_path
-    elsif current_user.type == 'User'
+    elsif current_user.type == 'Manager'
+      manager_clients_path
+    else
       root_path
     end
   end
@@ -19,8 +21,8 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         if current_user.type == 'Admin'
           format.html { redirect_to admin_users_path, notice: 'User was successfully updated.' }
-        elsif current_user.type == 'User'
-          format.html { redirect_to root_path, notice: 'User was successfully updated.' }
+        elsif current_user.type == 'Manager'
+          format.html { redirect_to manager_clients_path, notice: 'User was successfully updated.' }
         elsif current_user.type == 'User'
           format.html { redirect_to root_path, notice: 'User was successfully updated.' }
         end

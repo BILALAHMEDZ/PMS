@@ -34,8 +34,16 @@
                 <li class="nav-item">
                   <%= link_to 'Users', admin_users_path ,class: 'nav-link' %>
                 </li>
+               <li class="nav-item">
+                  <%= link_to 'Clients', admin_clients_path ,class: 'nav-link' %>
+                </li>
               </ul>
             <% elsif current_user.type == "Manager" %>
+              <ul class="navbar-nav mr-auto">
+               <li class="nav-item">
+                  <%= link_to 'Clients', manager_clients_path ,class: 'nav-link' %>
+                </li>
+              </ul>
             <% else %>
             <% end %>
             <ul class="navbar-nav mr-auto">
