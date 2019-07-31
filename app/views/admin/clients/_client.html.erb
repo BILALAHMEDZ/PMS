@@ -2,7 +2,7 @@
 <div class="container">
   <div>
     <%= form_tag admin_clients_path, method: 'get' do %>
-      <%= text_field_tag :search, params[:search], class: 'form-control col-11 float-left', placeholder: 'Search By Name'%>
+      <%= text_field_tag :search, params[:search], class: 'form-control col-11 float-left', placeholder: 'Search By Name OR Email'%>
       <%= submit_tag "Search", class: 'btn btn-primary float-right'%>
     <%end%>
   </div>
