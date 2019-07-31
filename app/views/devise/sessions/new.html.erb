@@ -1,6 +1,5 @@
 <% title "-Login" %>
-<div class="row1"></div>
-<div class="container mt-4">
+<div class="container">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="col-6 offset-3"><b>Email</b></div>
     <div class="input-group margin-bottom-sm col-6 offset-3">
@@ -12,7 +11,7 @@
       <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
       <%= f.password_field :password, autocomplete: "new-password" ,class: "form-control", placeholder: "Password"%>
     </div>
-    <div class="row"></div>
+    <div class="clearfix mb-3"></div>
     <% if devise_mapping.rememberable? %>
       <div class="field col-6 offset-3">
         <%= f.check_box :remember_me %>

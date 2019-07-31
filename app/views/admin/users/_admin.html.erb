@@ -1,20 +1,19 @@
 <% title "-All Users" %>
-<div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div>
 <div class="container">
   <div>
     <%= form_tag admin_users_path, method: 'get' do %>
       <%= text_field_tag :search, params[:search], class: 'form-control col-11 float-left', placeholder: 'Search By Name'%>
-      <%= submit_tag "Search", class: 'btn btn-primary float-right'%>
+      <%= submit_tag 'Search', class: 'btn btn-primary float-right'%>
     <%end%>
   </div>
-  <table class="table table-striped" id="myTable">
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th><strong>Name</strong></th>
-        <th><strong>Status</strong></th>
-        <th><strong>Type</strong></th>
-        <th><strong>Email</strong></th>
-        <th><strong>Option</strong></th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Type</th>
+        <th>Email</th>
+        <th>Option</th>
       </tr>
     </thead>
     <tbody>
@@ -24,15 +23,14 @@
           <td><%= user.status %></td>
           <td><%= user.type %></td>
           <td><%= user.email %></td>
-          <div class="btn_group">
           <td>
-          <%= link_to '', edit_admin_user_path(user) , class: 'btn btn-primary fa fa-pencil' %>
-          <%= link_to '', admin_destroy_user_path(user) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+            <%= link_to '', edit_admin_user_path(user) , class: 'btn btn-primary fa fa-pencil' %>
+            <%= link_to '', admin_user_path(user) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to 'Add User', new_admin_user_path , class: 'btn btn-primary fa fa-plus-square' %>
+  <%= link_to fa_icon('plus-square', text: 'Add User'), new_admin_user_path, class: 'btn btn-primary' %>
   <%= paginate @users %>
 </div>

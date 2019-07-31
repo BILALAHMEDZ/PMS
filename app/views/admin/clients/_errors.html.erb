@@ -1,5 +1,5 @@
 <% if client.errors.any? %>
-  <div id="error_explanation">
+  <div id="error_explanation" style="background-color: red">
     <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
     <ul>
     <% client.errors.full_messages.each do |message| %>

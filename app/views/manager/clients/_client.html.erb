@@ -1,5 +1,4 @@
 <% title "-All Clients" %>
-<div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div>
 <div class="container">
   <div>
     <%= form_tag manager_clients_path, method: 'get' do %>
@@ -22,15 +21,14 @@
           <td><%= client.name %></td>
           <td><%= client.phone %></td>
           <td><%= client.email %></td>
-          <div class="btn_group">
           <td>
           <%= link_to '', edit_manager_client_path(client) , class: 'btn btn-primary fa fa-pencil' %>
-          <%= link_to '', manager_destroy_client_path(client) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+          <%= link_to '', manager_client_path(client) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to 'Add Client', new_manager_client_path , class: 'btn btn-primary fa fa-plus-square' %>
+  <%= link_to fa_icon('plus-square', text: 'Add Client'), new_manager_client_path , class: 'btn btn-primary' %>
   <%= paginate @clients %>
 </div>

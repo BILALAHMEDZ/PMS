@@ -1,41 +1,30 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  def index
-    if current_user.type == 'Admin'
-      redirect_to admin_users_path
-    elsif current_user.type == 'Manager'
-      manager_clients_path
-    else
-      root_path
-    end
-  end
+  def index; end
 
   def profile_edit
-    @user = User.find(params[:id])
+    find_user
   end
 
   def profile_update
-    @user = User.find(params[:id])
-    respond_to do |format|
-      if @user.update(user_params)
-        if current_user.type == 'Admin'
-          format.html { redirect_to admin_users_path, notice: 'User was successfully updated.' }
-        elsif current_user.type == 'Manager'
-          format.html { redirect_to manager_clients_path, notice: 'User was successfully updated.' }
-        elsif current_user.type == 'User'
-          format.html { redirect_to root_path, notice: 'User was successfully updated.' }
-        end
-      else
-        format.html { render :profile_edit }
-      end
+    find_user
+    if @user.update(user_params)
+      red_to_ind
+    else
+      render :profile_edit
     end
   end
 
   private
 
+  def find_user
+    @user = User.find_by_id(params[:id])
+    render file: 'public/404.html', status: :not_found, layout: false unless @user
+  end
+
   def user_params
-    params.require(klass.to_s.underscore).permit(:name, :status, :type, :email)
+    params.require(klass.to_s.underscore).permit(:name, :email)
   end
 
   def klass

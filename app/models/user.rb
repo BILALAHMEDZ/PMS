@@ -10,9 +10,11 @@ class User < ApplicationRecord
   scope :all_except, ->(user) { where.not(id: user) }
   TYPE_ADMIN = 'Admin'
   TYPE_MANAGER = 'Manager'
-  TYPES = [TYPE_ADMIN, TYPE_MANAGER].freeze
+  TYPE_USER = 'User'
+  TYPES = [TYPE_ADMIN, TYPE_MANAGER, TYPE_USER].freeze
   STATUS_ENABLED = 'Enabled'
   STATUS_DISABLED = 'Disabled'
+  STATUSES = [STATUS_ENABLED, STATUS_DISABLED].freeze
   after_initialize :init_default
 
   def admin?
@@ -33,7 +35,7 @@ class User < ApplicationRecord
 
   def self.search(search)
     if search
-      where(['name LIKE ?', "%#{search}%"])
+      where('name LIKE (?) OR email LIKE (?)', "%#{search}%", "%#{search}%")
     else
       all
     end
@@ -44,7 +46,7 @@ class User < ApplicationRecord
   def init_default
     if new_record?
       self.status = STATUS_ENABLED
-      self.type = 'User'
+      self.type = TYPE_USER
     end
   end
 end

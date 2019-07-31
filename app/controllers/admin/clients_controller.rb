@@ -11,40 +11,38 @@ class Admin::ClientsController < AdminBaseController
 
   def create
     @client = Client.new(client_params)
-    respond_to do |format|
-      if @client.save
-        format.html { redirect_to admin_clients_url, notice: 'Client was successfully created.' }
-      else
-        format.html { render :new }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
-      end
+    if @client.save
+      redirect_to admin_clients_url, notice: 'Client was successfully created.'
+    else
+      render :new
     end
   end
 
   def edit
-    @client = Client.find(params[:id])
+    find_user
   end
 
   def update
-    @client = Client.find(params[:id])
-    respond_to do |format|
-      if @client.update(client_params)
-        format.html { redirect_to admin_clients_path, notice: 'Client was successfully updated.' }
-      else
-        format.html { render :client_edit }
-      end
+    find_user
+    if @client.update(client_params)
+      redirect_to admin_clients_path, notice: 'Client was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
-    @client = Client.find(params[:id])
+    find_user
     @client.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_clients_path, notice: 'Client was successfully destroyed.' }
-    end
+    redirect_to admin_clients_path, notice: 'Client was successfully destroyed.'
   end
 
   private
+
+  def find_user
+    @client = Client.find_by_id(params[:id])
+    render file: 'public/404.html', status: :not_found, layout: false unless @client
+  end
 
   def client_params
     params.require(:client).permit(:name, :phone, :email)

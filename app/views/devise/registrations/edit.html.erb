@@ -1,5 +1,4 @@
 <% title "-Change Password" %>
-<div class="row1"></div>
 <div class="container">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -7,22 +6,22 @@
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
     <div class="field">
-      <%= f.label :new_password %> <i>(leave blank if you don't want to change it)</i><div class="row"></div>
+      <%= f.label :new_password %> <i>(leave blank if you don't want to change it)</i><div class="clearfix mb-3"></div>
       <%= f.password_field :password, autocomplete: "new-password" ,class: "form-control"%>
       <% if @minimum_password_length %>
-        <div class="row"></div>
+        <div class="clearfix mb-3"></div>
         <em><%= @minimum_password_length %> characters minimum</em>
       <% end %>
     </div>
     <div class="field">
-      <%= f.label :new_password_confirmation %><div class="row"></div>
+      <%= f.label :new_password_confirmation %><div class="clearfix mb-3"></div>
       <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: "form-control"%>
     </div>
     <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><div class="row"></div>
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><div class="clearfix mb-3"></div>
       <%= f.password_field :current_password, autocomplete: "current-password" ,class: "form-control"%>
     </div>
-    <div class="row"></div>
+    <div class="clearfix mb-3"></div>
     <div class="actions">
       <%= f.submit "Update" ,class: "btn btn-primary"%>
       <%= link_to "Back", edit_profile_path(current_user), class:'btn btn-success' %>

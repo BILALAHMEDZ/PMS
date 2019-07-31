@@ -1,31 +1,27 @@
 # frozen_string_literal: true
 
 class ClientsPolicy < ApplicationPolicy
-  def edit?
-    user.manager?
-  end
-
   def index?
     user.manager?
   end
 
+  def edit?
+    index?
+  end
+
   def new?
-    user.manager?
+    index?
   end
 
   def create?
-    user.manager?
+    index?
   end
 
   def update?
-    user.manager?
+    index?
   end
 
   def destroy?
-    user.manager?
-  end
-
-  def check_manager?
-    user.manager?
+    index?
   end
 end

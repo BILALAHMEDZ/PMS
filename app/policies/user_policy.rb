@@ -1,31 +1,27 @@
 # frozen_string_literal: true
 
 class UserPolicy < ApplicationPolicy
-  def edit?
-    user.admin?
-  end
-
   def index?
     user.admin?
   end
 
+  def edit?
+    index?
+  end
+
   def new?
-    user.admin?
+    index?
   end
 
   def create?
-    user.admin?
+    index?
   end
 
   def update?
-    user.admin?
+    index?
   end
 
   def destroy?
-    user.admin?
-  end
-
-  def check_admin?
-    user.admin?
+    index?
   end
 end

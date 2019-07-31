@@ -4,13 +4,24 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   rescue_from Pundit::NotAuthorizedError, with: :unauthorized_user
+
   include Pundit
   protect_from_forgery
 
+  def red_to_ind
+    if current_user.admin?
+      redirect_to admin_users_path, notice: 'User was successfully updated.'
+    elsif current_user.manager?
+      redirect_to manager_clients_path, notice: 'User was successfully updated.'
+    elsif current_user.user?
+      redirect_to root_path, notice: 'User was successfully updated.'
+    end
+  end
+
   def after_sign_in_path_for(_resource)
-    if current_user.type == 'Admin'
+    if current_user.admin?
       admin_users_url
-    elsif current_user.type == 'Manager'
+    elsif current_user.manager?
       manager_clients_url
     else
       root_url
@@ -28,12 +39,12 @@ class ApplicationController < ActionController::Base
 
   def unauthorized_user
     flash[:alert] = 'You are not authorized to perform this action.'
-    if current_user.type == 'Admin'
-      redirect_to(request.referrer || admin_clients_path)
-    elsif current_user.type == 'Manager'
-      redirect_to(request.referrer || manager_clients_path)
+    if current_user.admin?
+      return admin_clients_path
+    elsif current_user.manager?
+      return manager_clients_path
     else
-      root_url
+      return root_url
     end
   end
 end

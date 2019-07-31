@@ -2,19 +2,17 @@
 
 Rails.application.routes.draw do
   namespace :manager do
-    resources :clients
-    delete 'user/:id/destroy_client', to: 'clients#destroy', as: :destroy_client
+    resources :clients, only: %i[index new create edit update destroy]
   end
 
   namespace :admin do
-    get 'user/:id/edit', to: 'users#edit', as: :edit_user
-    delete 'user/:id/destroy', to: 'users#destroy', as: :destroy_user
-    delete 'user/:id/destroy_client', to: 'clients#destroy', as: :destroy_client
-    resources :users
-    resources :clients
+    resources :clients, only: %i[index new create edit update destroy]
+    resources :users, only: %i[index new create edit update destroy]
   end
+
   root 'users#index'
   devise_for :users
   get 'user/:id/edit_profile', to: 'users#profile_edit', as: :edit_profile
   patch 'user/:id/profile_update', to: 'users#profile_update', as: :profile_update
+  match '*path' => redirect('/'), via: :get
 end

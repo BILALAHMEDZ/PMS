@@ -47,5 +47,9 @@ class ApplicationPolicy
     def resolve
       scope.all
     end
+
+    def validate_role
+      user.role == whitelist_role
+    end
   end
 end
