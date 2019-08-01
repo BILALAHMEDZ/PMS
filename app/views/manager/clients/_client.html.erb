@@ -22,6 +22,7 @@
           <td><%= client.phone %></td>
           <td><%= client.email %></td>
           <td>
+          <%= link_to '', manager_client_path(client) , class: 'btn btn-primary fa fa-eye' %>
           <%= link_to '', edit_manager_client_path(client) , class: 'btn btn-primary fa fa-pencil' %>
           <%= link_to '', manager_client_path(client) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
           </td>

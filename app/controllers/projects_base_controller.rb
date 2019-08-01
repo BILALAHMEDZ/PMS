@@ -9,6 +9,10 @@ class ProjectsBaseController < ApplicationController
     @project = Project.new
   end
 
+  def show
+    find_project
+  end
+
   def create
     @project = Project.new(project_params)
     if @project.save

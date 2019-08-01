@@ -9,6 +9,10 @@ class Admin::ClientsController < AdminBaseController
     @client = Client.new
   end
 
+  def show
+    find_user
+  end
+
   def create
     @client = Client.new(client_params)
     if @client.save

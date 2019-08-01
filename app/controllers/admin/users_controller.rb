@@ -9,6 +9,10 @@ class Admin::UsersController < AdminBaseController
     @user = User.new
   end
 
+  def show
+    find_user
+  end
+
   def create
     @user = User.new(create_params)
     if @user.save

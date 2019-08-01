@@ -9,6 +9,10 @@ class PaymentsBaseController < ApplicationController
     @payment = Payment.new
   end
 
+  def show
+    find_payment
+  end
+
   def create
     @payment = Payment.new(payment_params)
     if @payment.save
@@ -19,11 +23,11 @@ class PaymentsBaseController < ApplicationController
   end
 
   def edit
-    find_Payment
+    find_payment
   end
 
   def update
-    find_Payment
+    find_payment
     if @payment.update(payment_params)
       redirect_to my_payment, notice: 'Payment was successfully updated.'
     else
@@ -32,14 +36,14 @@ class PaymentsBaseController < ApplicationController
   end
 
   def destroy
-    find_Payment
+    find_payment
     @payment.destroy
     redirect_to my_payment, notice: 'Payment was successfully destroyed.'
   end
 
   private
 
-  def find_Payment
+  def find_payment
     @payment = Payment.find_by_id(params[:id])
     render file: 'public/404.html', status: :not_found, layout: false unless @payment
   end

@@ -9,6 +9,10 @@ class Manager::ClientsController < ManagerBaseController
     @client = Client.new
   end
 
+  def show
+    find_user
+  end
+
   def create
     @client = Client.new(client_params)
     if @client.save
@@ -19,11 +23,11 @@ class Manager::ClientsController < ManagerBaseController
   end
 
   def edit
-    @client = Client.find(params[:id])
+    find_user
   end
 
   def update
-    @client = Client.find(params[:id])
+    find_user
     if @client.update(client_params)
       redirect_to manager_clients_path, notice: 'Client was successfully updated.'
     else
@@ -32,12 +36,17 @@ class Manager::ClientsController < ManagerBaseController
   end
 
   def destroy
-    @client = Client.find(params[:id])
+    find_user
     @client.destroy
     redirect_to manager_clients_path, notice: 'Client was successfully destroyed.'
   end
 
   private
+
+  def find_user
+    @client = Client.find_by_id(params[:id])
+    render file: 'public/404.html', status: :not_found, layout: false unless @client
+  end
 
   def client_params
     params.require(:client).permit(:name, :phone, :email)

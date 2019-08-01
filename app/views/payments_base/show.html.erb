@@ -1,0 +1,20 @@
+<% title "-All Payments" %>
+<div class="container">
+  <div>
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th><strong>Payment</strong></th>
+        <th><strong>Actions</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= @payment.payment %></td>
+        </tr>
+    </tbody>
+  </table>
+  <div class="actions">
+    <%= link_to "Back", :back, class: 'btn btn-success' %>
+  </div>
+</div>

@@ -16,6 +16,10 @@ class Admin::ProjectsController < ProjectsBaseController
     super
   end
 
+  def show
+    super
+  end
+
   def create
     super
   end

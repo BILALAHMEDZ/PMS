@@ -16,6 +16,10 @@ class Admin::PaymentsController < PaymentsBaseController
     super
   end
 
+  def show
+    super
+  end
+
   def create
     super
   end
