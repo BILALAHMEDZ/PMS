@@ -1,0 +1,9 @@
+<% title "-Add payment" %>
+<div class="container">
+  <%if current_user.admin?%>
+    <%= render 'form', payment: @payment %>
+  <%elsif current_user.manager?%>
+    <%= render 'form', payment: @payment %>
+  <%end%>
+</div>
+

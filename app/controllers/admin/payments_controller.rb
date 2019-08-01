@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::ProjectsController < ProjectsBaseController
+class Admin::PaymentsController < PaymentsBaseController
   before_action :validate_admin
   def validate_admin
     return if current_user.admin?
@@ -32,7 +32,7 @@ class Admin::ProjectsController < ProjectsBaseController
     super
   end
 
-  def my_project
-    admin_projects_path
+  def my_payment
+    admin_payments_path
   end
 end

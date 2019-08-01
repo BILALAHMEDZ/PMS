@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-class ProjectsController < ApplicationController
-  def validate_user
-    return if current_user.user?
-
-    redirect_to :root, alert: 'You are not allowed to access user'
-  end
-
+class ProjectsBaseController < ApplicationController
   def index
     @projects = Project.all
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Manager::ProjectsController < ProjectsBaseController
+class Manager::PaymentsController < PaymentsBaseController
   before_action :validate_manager
 
   def validate_manager
@@ -33,7 +33,7 @@ class Manager::ProjectsController < ProjectsBaseController
     super
   end
 
-  def my_project
-    manager_projects_path
+  def my_payment
+    manager_payments_path
   end
 end

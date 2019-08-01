@@ -1,0 +1,33 @@
+<% title "-All Payments" %>
+<div class="container">
+  <div>
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th><strong>Payment</strong></th>
+        <th><strong>Actions</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payments.each do |payment| %>
+        <tr>
+          <td><%= payment.payment %></td>
+          <td>
+            <%if current_user.admin?%>
+              <%= link_to '', edit_admin_payment_path(payment) , class: 'btn btn-primary fa fa-pencil' %>
+              <%= link_to '', admin_payment_path(payment) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+            <%elsif current_user.manager?%>
+              <%= link_to '', edit_manager_payment_path(payment) , class: 'btn btn-primary fa fa-pencil' %>
+              <%= link_to '', manager_payment_path(payment) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+            <%end%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%if current_user.admin?%>
+    <%= link_to fa_icon('plus-square', text: 'Add Payment'), new_admin_payment_path , class: 'btn btn-primary' %>
+  <%elsif current_user.manager?%>
+     <%= link_to fa_icon('plus-square', text: 'Add Payment'), new_manager_payment_path , class: 'btn btn-primary' %>
+  <%end%>
+</div>

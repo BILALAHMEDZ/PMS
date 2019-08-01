@@ -10,15 +10,15 @@
   </head>
   <body>
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <%def after_sign_in_path_for(_resource)%>
           <%if current_user.type == 'Admin'%>
-            <%= link_to fa_icon('home', text: 'PMS'), admin_users_url, class: 'nav-link' %>
+            <%= link_to fa_icon('home', text: 'PMS'), admin_users_url, class: 'nav-link bg-light' %>
           <%else%>
-            <%= link_to fa_icon('home', text: 'PMS'), root_url, class: 'nav-link fa' %>
+            <%= link_to fa_icon('home', text: 'PMS'), root_url, class: 'nav-link bg-light' %>
           <%end%>
         <%end%>
-        <%= link_to fa_icon('home', text: 'PMS'), class: 'nav-link' %>
+        <%= link_to fa_icon('home', text: 'PMS'), class: 'nav-link text-light' %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="
           navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -32,37 +32,40 @@
             <% if current_user.admin? %>
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <%= link_to 'Users', admin_users_path ,class: 'nav-link' %>
+                    <%= link_to 'Users', admin_users_path ,class: 'nav-link text-light' %>
                 </li>
                 <li class="nav-item">
-                    <%= link_to 'Clients', admin_clients_path ,class: 'nav-link' %>
+                    <%= link_to 'Clients', admin_clients_path ,class: 'nav-link text-light' %>
                 </li>
                <li class="nav-item">
-                    <%= link_to 'Projects', admin_projects_path ,class: 'nav-link' %>
+                    <%= link_to 'Projects', admin_projects_path ,class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to 'Payments', admin_payments_path ,class: 'nav-link text-light' %>
                 </li>
               </ul>
             <% elsif current_user.manager? %>
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <%= link_to 'Clients', manager_clients_path ,class: 'nav-link' %>
+                  <%= link_to 'Clients', manager_clients_path ,class: 'nav-link text-light' %>
                 </li>
                  <li class="nav-item">
-                    <%= link_to 'Projects', manager_projects_path ,class: 'nav-link' %>
+                    <%= link_to 'Projects', manager_projects_path ,class: 'nav-link text-light' %>
+                </li>
+                 <li class="nav-item">
+                    <%= link_to 'Payments', manager_payments_path ,class: 'nav-link text-light' %>
                 </li>
               </ul>
             <% elsif current_user.user? %>
-            <ul class="navbar-nav mr-auto">
-                 <li class="nav-item">
-                    <%= link_to 'Projects', projects_path ,class: 'nav-link' %>
-                </li>
-            </ul>
+              <ul class="navbar-nav mr-auto">
+              </ul>
             <% end %>
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
               <li class="nav-item">
-                <%= link_to fa_icon('user-o', text: 'Edit Profile'), edit_profile_path(current_user) ,class: 'nav-link' %>
+                <%= link_to fa_icon('user-o', text: 'Edit Profile'), edit_profile_path(current_user) ,class: 'nav-link text-light' %>
               </li>
-              <li class="nav-item"><%= link_to(fa_icon('sign-out', text: 'Logout'), destroy_user_session_path, method: :delete ,class: 'nav-link' )%>
+              <li class="nav-item"><%= link_to(fa_icon('sign-out', text: 'Logout'), destroy_user_session_path, method: :delete ,class: 'nav-link text-light' )%>
               </li>
             </ul>
           <% else %>
