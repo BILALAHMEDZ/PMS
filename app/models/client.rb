@@ -2,7 +2,6 @@
 
 class Client < ApplicationRecord
   paginates_per 5
-
   validates :name, presence: true
   validates :phone, presence: true, length: { is: 11 }
   validates :email, presence: true, uniqueness: { case_sensitive: false }

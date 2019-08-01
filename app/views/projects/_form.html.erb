@@ -1,0 +1,25 @@
+<%= form_with(model: @project, url: {action: 'create'}, class: 'form-vertical' , local: true) do |f| %>
+  <%= render 'errors', project: @project %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title ,class: "form-control"%>
+  </div>
+  <div class="clearfix mb-3"></div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control"%>
+  </div>
+  <div class="field">
+    <%= f.label :hours_spent %>
+    <%= f.text_field :hours_spent, class: "form-control"%>
+  </div>
+  <div class="field">
+    <%= f.label :amount %>
+    <%= f.text_field :amount, class: "form-control"%>
+  </div>
+  <div class="clearfix mb-3"></div>
+  <div class="actions">
+    <%= f.submit "Create" ,class: "btn btn-primary"%>
+    <%= link_to "Back", projects_path, class: 'btn btn-success' %>
+  </div>
+<% end %>

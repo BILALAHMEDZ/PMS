@@ -1,0 +1,39 @@
+<% title "-All Projects" %>
+<div class="container">
+  <div>
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th><strong>Title</strong></th>
+        <th><strong>Description</strong></th>
+        <th><strong>hours_spent</strong></th>
+        <th><strong>Amount</strong></th>
+        <th><strong>Actions</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= project.title %></td>
+          <td><%= project.description %></td>
+          <td><%= project.hours_spent %></td>
+          <td><%= project.amount %></td>
+          <td>
+            <%if current_user.admin?%>
+              <%= link_to '', edit_admin_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
+              <%= link_to '', admin_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+            <%elsif current_user.manager?%>
+              <%= link_to '', edit_manager_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
+              <%= link_to '', manager_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+            <%end%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%if current_user.admin?%>
+    <%= link_to fa_icon('plus-square', text: 'Add Project'), new_admin_project_path , class: 'btn btn-primary' %>
+  <%elsif current_user.manager?%>
+     <%= link_to fa_icon('plus-square', text: 'Add Project'), new_manager_project_path , class: 'btn btn-primary' %>
+  <%end%>
+</div>

@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
       admin_users_url
     elsif current_user.manager?
       manager_clients_url
+    elsif current_user.user?
+      projects_url
     else
       root_url
     end

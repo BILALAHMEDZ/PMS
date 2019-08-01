@@ -37,14 +37,25 @@
                 <li class="nav-item">
                     <%= link_to 'Clients', admin_clients_path ,class: 'nav-link' %>
                 </li>
+               <li class="nav-item">
+                    <%= link_to 'Projects', admin_projects_path ,class: 'nav-link' %>
+                </li>
               </ul>
             <% elsif current_user.manager? %>
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                   <%= link_to 'Clients', manager_clients_path ,class: 'nav-link' %>
                 </li>
+                 <li class="nav-item">
+                    <%= link_to 'Projects', manager_projects_path ,class: 'nav-link' %>
+                </li>
               </ul>
-            <% else %>
+            <% elsif current_user.user? %>
+            <ul class="navbar-nav mr-auto">
+                 <li class="nav-item">
+                    <%= link_to 'Projects', projects_path ,class: 'nav-link' %>
+                </li>
+            </ul>
             <% end %>
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">

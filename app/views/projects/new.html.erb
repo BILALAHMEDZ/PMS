@@ -1,0 +1,9 @@
+<% title "-Add Project" %>
+<div class="container">
+  <%if current_user.admin?%>
+    <%= render 'form', project: @project %>
+  <%elsif current_user.manager?%>
+    <%= render 'form', project: @project %>
+  <%end%>
+</div>
+
