@@ -7,6 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :name, presence: true
   paginates_per 5
+  has_many :projects
+  has_many :payments
   scope :all_except, ->(user) { where.not(id: user) }
   TYPE_ADMIN = 'Admin'
   TYPE_MANAGER = 'Manager'

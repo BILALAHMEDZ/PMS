@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_801_080_626) do
+ActiveRecord::Schema.define(version: 20_190_801_165_520) do
   create_table 'clients', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name'
     t.string 'email'
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 20_190_801_080_626) do
     t.decimal 'payment', precision: 10
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'project_id'
+    t.bigint 'creater_id'
+    t.index ['creater_id'], name: 'index_payments_on_creater_id'
+    t.index ['project_id'], name: 'index_payments_on_project_id'
   end
 
   create_table 'projects', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
@@ -34,6 +38,10 @@ ActiveRecord::Schema.define(version: 20_190_801_080_626) do
     t.decimal 'amount', precision: 10
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'client_id'
+    t.bigint 'creater_id'
+    t.index ['client_id'], name: 'index_projects_on_client_id'
+    t.index ['creater_id'], name: 'index_projects_on_creater_id'
   end
 
   create_table 'users', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
@@ -50,4 +58,7 @@ ActiveRecord::Schema.define(version: 20_190_801_080_626) do
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
+
+  add_foreign_key 'payments', 'projects'
+  add_foreign_key 'projects', 'clients'
 end
