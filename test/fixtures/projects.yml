@@ -4,12 +4,10 @@ one:
   title: MyString
   description: MyString
   hours_spent: 1
-  total_payment: 9.99
-  creater_id: 
+  amount: 9.99
 
 two:
   title: MyString
   description: MyString
   hours_spent: 1
-  total_payment: 9.99
-  creater_id: 
+  amount: 9.99
