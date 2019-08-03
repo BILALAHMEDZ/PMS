@@ -12,13 +12,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_801_165_520) do
+ActiveRecord::Schema.define(version: 20_190_803_202_237) do
   create_table 'clients', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name'
     t.string 'email'
     t.string 'phone'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+  end
+
+  create_table 'employees_projects', id: false, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.bigint 'project_id', null: false
+    t.bigint 'employee_id', null: false
   end
 
   create_table 'payments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
@@ -40,8 +45,16 @@ ActiveRecord::Schema.define(version: 20_190_801_165_520) do
     t.datetime 'updated_at', null: false
     t.bigint 'client_id'
     t.bigint 'creater_id'
+    t.bigint 'manager_id'
     t.index ['client_id'], name: 'index_projects_on_client_id'
     t.index ['creater_id'], name: 'index_projects_on_creater_id'
+    t.index ['manager_id'], name: 'index_projects_on_manager_id'
+  end
+
+  create_table 'timelogs', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.string 'hours'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
   create_table 'users', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|

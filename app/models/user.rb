@@ -12,8 +12,8 @@ class User < ApplicationRecord
   scope :all_except, ->(user) { where.not(id: user) }
   TYPE_ADMIN = 'Admin'
   TYPE_MANAGER = 'Manager'
-  TYPE_USER = 'User'
-  TYPES = [TYPE_ADMIN, TYPE_MANAGER, TYPE_USER].freeze
+  TYPE_EMPLOYEE = 'Employee'
+  TYPES = [TYPE_ADMIN, TYPE_MANAGER, TYPE_EMPLOYEE].freeze
   STATUS_ENABLED = 'Enabled'
   STATUS_DISABLED = 'Disabled'
   STATUSES = [STATUS_ENABLED, STATUS_DISABLED].freeze
@@ -23,8 +23,8 @@ class User < ApplicationRecord
     type == 'Admin'
   end
 
-  def user?
-    type == 'User'
+  def employee?
+    type == 'Employee'
   end
 
   def manager?
@@ -48,7 +48,7 @@ class User < ApplicationRecord
   def init_default
     if new_record?
       self.status = STATUS_ENABLED
-      self.type = TYPE_USER
+      self.type = TYPE_EMPLOYEEs
     end
   end
 end
