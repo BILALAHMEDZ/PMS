@@ -2,19 +2,19 @@
 
 Rails.application.routes.draw do
   namespace :manager do
-    resources :clients, only: %i[index new create edit update destroy show]
-    resources :projects, only: %i[index new create edit update destroy show]
-    resources :payments, only: %i[index new create edit update destroy show]
+    resources :clients
+    resources :projects
+    resources :payments
+    get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
 
   namespace :admin do
-    resources :clients, only: %i[index new create edit update destroy show]
-    resources :users, only: %i[index new create edit update destroy show]
-    resources :projects, only: %i[index new create edit update destroy show]
-    resources :payments, only: %i[index new create edit update destroy show]
+    resources :clients
+    resources :users
+    resources :projects
+    resources :payments
+    get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
-  resources :projects, only: %i[index new create edit update destroy show]
-  resources :payments, only: %i[index new create edit update destroy show]
   root 'users#index'
   devise_for :users
   resources :users

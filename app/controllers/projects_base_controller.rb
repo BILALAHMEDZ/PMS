@@ -14,12 +14,23 @@ class ProjectsBaseController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(project_params.except(:employees))
+    @empls = project_params[:employees]
+    @empls.shift
+    @empls.each do |a|
+      e = Employee.find(a)
+      @project.employees << e
+    end
+    @project.creater_id = current_user.id
     if @project.save
       redirect_to my_project, notice: 'Project was successfully created.'
     else
       render :new
     end
+  end
+
+  def assigned_employees
+    find_project
   end
 
   def edit
@@ -28,7 +39,17 @@ class ProjectsBaseController < ApplicationController
 
   def update
     find_project
-    if @project.update(project_params)
+    @empls = project_params[:employees]
+    @abc = project_params.except(:employees)
+    @empls.shift
+    @project.employees.delete(@project.employees)
+    @empls.each do |a|
+      e = Employee.find(a)
+      @project.employees << e
+    end
+    @abc[:employees] = @project.employees
+    puts @abc
+    if @project.update(@abc)
       redirect_to my_project, notice: 'Project was successfully updated.'
     else
       render :edit
@@ -49,6 +70,6 @@ class ProjectsBaseController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :hours_spent, :amount)
+    params.require(:project).permit(:title, :description, :hours_spent, :amount, :client_id, :manager_id, employees: [])
   end
 end

@@ -18,6 +18,22 @@
     <%= f.text_field :amount, class: "form-control"%>
   </div>
   <div class="clearfix mb-3"></div>
+  <div class="field">
+   <%= f.select :client_id, ("<option value=''>Select Client</option>" + options_from_collection_for_select(Client.all, :id, :name, :selected => f.object.client_id)).html_safe, {}, { id: 'choose-client', :class => 'chosen-select'} %>
+  </div>
+  <div class="clearfix mb-3"></div>
+  <div class="field">
+   <%= f.select :manager_id, ("<option value=''>Select Manager</option>" + options_from_collection_for_select(Manager.all, :id, :name, :selected => f.object.manager_id)).html_safe, {}, { id: 'choose-client', :class => 'chosen-select'} %>
+  </div>
+  <div class="clearfix mb-3"></div>
+  <div class="field">
+    <%= f.select :employees,
+    Employee.all.map { |u| [u.name, u.id] },
+    { include_blank: true },
+    { multiple: true, class: 'chosen-select' }
+    %>
+  </div>
+  <div class="clearfix mb-3"></div>
   <div class="actions">
     <%= f.submit "Create" ,class: "btn btn-primary"%>
     <%= link_to "Back", :back, class: 'btn btn-success' %>

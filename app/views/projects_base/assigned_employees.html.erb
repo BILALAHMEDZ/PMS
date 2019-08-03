@@ -1,0 +1,18 @@
+<% title "-All Projects" %>
+<div class="container">
+  <div>
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th><strong>Employees</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @project.employees.each do |employee| %>
+        <tr>
+          <td><%= employee.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

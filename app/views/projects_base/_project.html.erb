@@ -8,6 +8,9 @@
         <th><strong>Description</strong></th>
         <th><strong>hours_spent</strong></th>
         <th><strong>Amount</strong></th>
+        <th><strong>Client</strong></th>
+        <th><strong>Manager</strong></th>
+        <th><strong>Created By</strong></th>
         <th><strong>Actions</strong></th>
       </tr>
     </thead>
@@ -18,15 +21,22 @@
           <td><%= project.description %></td>
           <td><%= project.hours_spent %></td>
           <td><%= project.amount %></td>
+          <td><%= project.client.name %></td>
+          <td><%= project.manager.name %></td>
+          <td><%= project.creater.name %></td>
           <td>
             <%if current_user.admin?%>
               <%= link_to '', admin_project_path(project) , class: 'btn btn-primary fa fa-eye' %>
               <%= link_to '', edit_admin_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
-              <%= link_to '', admin_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+              <%= link_to '', admin_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
+                <%= link_to '', admin_assigned_employees_path(project) , class: 'btn btn-primary fa fa-group' %>
+              </td>
             <%elsif current_user.manager?%>
               <%= link_to '', manager_project_path(project) , class: 'btn btn-primary fa fa-eye' %>
               <%= link_to '', edit_manager_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
-              <%= link_to '', manager_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+              <%= link_to '', manager_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
+                <%= link_to '', manager_assigned_employees_path(project) , class: 'btn btn-primary fa fa-group' %>
+            </td>
             <%end%>
           </td>
         </tr>

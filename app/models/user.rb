@@ -48,7 +48,7 @@ class User < ApplicationRecord
   def init_default
     if new_record?
       self.status = STATUS_ENABLED
-      self.type = TYPE_EMPLOYEEs
+      self.type = TYPE_EMPLOYEE
     end
   end
 end
