@@ -4,14 +4,18 @@
   <table class="table table-striped" id="myTable">
     <thead>
       <tr>
-        <th><strong>Payment</strong></th>
-        <th><strong>Actions</strong></th>
+        <th>Payment</th>
+        <th>Project</th>
+        <th>Created By</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @payments.each do |payment| %>
         <tr>
-          <td><%= payment.payment %></td>
+          <td><%= payment.payment %>$</td>
+          <td><%= payment.project.title %></td>
+          <td><%= payment.creater.name %></td>
           <td>
             <%if current_user.admin?%>
               <%= link_to '', admin_payment_path(payment) , class: 'btn btn-primary fa fa-eye' %>
