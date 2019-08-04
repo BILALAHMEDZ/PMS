@@ -1,0 +1,35 @@
+<% title "-All Timelogs" %>
+<div class="container">
+  <div>
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th>Hours</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @timelogs.each do |timelog| %>
+        <tr>
+          <td><%= timelog.hours %>$</td>
+          <td>
+            <%if current_user.admin?%>
+              <%= link_to '', admin_timelog_path(timelog) , class: 'btn btn-primary fa fa-eye' %>
+              <%= link_to '', edit_admin_timelog_path(timelog) , class: 'btn btn-primary fa fa-pencil' %>
+              <%= link_to '', admin_timelog_path(timelog) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+            <%elsif current_user.employee?%>
+              <%= link_to '', employee_timelog_path(timelog) , class: 'btn btn-primary fa fa-eye' %>
+              <%= link_to '', edit_employee_timelog_path(timelog) , class: 'btn btn-primary fa fa-pencil' %>
+              <%= link_to '', employee_timelog_path(timelog) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+            <%end%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%if current_user.admin?%>
+    <%= link_to fa_icon('plus-square', text: 'Add timelog'), new_admin_timelog_path , class: 'btn btn-primary' %>
+  <%elsif current_user.employee?%>
+     <%= link_to fa_icon('plus-square', text: 'Add timelog'), new_employee_timelog_path , class: 'btn btn-primary' %>
+  <%end%>
+</div>

@@ -1,7 +1,7 @@
 <% title "-Edit Client" %>
 <div class="container">
   <%= form_with(model: @payment, url: {action: 'update'}, class: 'form-vertical' , local: true) do |f| %>
-    <%= render 'errors', client: @payment %>
+    <%= render 'errors', payment: @payment %>
     <div class="field">
       <%= f.label :payment %>
       <%= f.text_field :payment, class: "form-control"%>

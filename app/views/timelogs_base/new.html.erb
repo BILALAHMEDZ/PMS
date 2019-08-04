@@ -1,0 +1,9 @@
+<% title "-Add Timelog" %>
+<div class="container">
+  <%if current_user.admin?%>
+    <%= render 'form', timelog: @timelog %>
+  <%elsif current_user.employee?%>
+    <%= render 'form', timelog: @timelog %>
+  <%end%>
+</div>
+

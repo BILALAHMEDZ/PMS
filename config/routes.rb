@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   namespace :manager do
+    resources :timelogs
     resources :clients
     resources :projects
     resources :payments
@@ -9,12 +10,18 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :timelogs
     resources :clients
     resources :users
     resources :projects
     resources :payments
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
+
+  namespace :employee do
+    resources :timelogs
+  end
+
   root 'users#index'
   devise_for :users
   resources :users

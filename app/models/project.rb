@@ -7,4 +7,12 @@ class Project < ApplicationRecord
   belongs_to :creater, class_name: 'User'
   has_and_belongs_to_many :employees, join_table: 'employees_projects'
   validates :title, :hours_spent, :amount, presence: true
+
+  def self.search(search)
+    if search
+      where('title LIKE (?)', "%#{search}%")
+    else
+      all
+    end
+  end
 end

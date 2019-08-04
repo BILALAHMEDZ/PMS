@@ -2,7 +2,7 @@
 
 class ProjectsBaseController < ApplicationController
   def index
-    @projects = Project.all
+    @projects = Project.search(params[:search]).order(:created_at).page(params[:page])
   end
 
   def new
