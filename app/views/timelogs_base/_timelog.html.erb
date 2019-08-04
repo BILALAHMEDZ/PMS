@@ -11,7 +11,7 @@
     <tbody>
       <% @timelogs.each do |timelog| %>
         <tr>
-          <td><%= timelog.hours %>$</td>
+          <td><%= timelog.hours %></td>
           <td>
             <%if current_user.admin?%>
               <%= link_to '', admin_timelog_path(timelog) , class: 'btn btn-primary fa fa-eye' %>

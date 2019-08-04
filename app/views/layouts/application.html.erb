@@ -44,6 +44,9 @@
                 <li class="nav-item">
                     <%= link_to 'Timelogs', admin_timelogs_path ,class: 'nav-link text-light' %>
                 </li>
+                <li class="nav-item">
+                    <%= link_to 'Comments', admin_comments_path ,class: 'nav-link text-light' %>
+                </li>
               </ul>
             <% elsif current_user.manager? %>
               <ul class="navbar-nav mr-auto">
@@ -61,6 +64,9 @@
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                   <%= link_to 'Timelogs', employee_timelogs_path ,class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to 'Comments', employee_comments_path ,class: 'nav-link text-light' %>
                 </li>
               </ul>
             <% end %>
