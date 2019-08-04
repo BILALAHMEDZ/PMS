@@ -2,7 +2,7 @@
 
 class Client < ApplicationRecord
   paginates_per 5
-  has_many :projects
+  has_many :projects, dependent: :destroy
   validates :name, presence: true
   validates :phone, presence: true, length: { is: 11 }
   validates :email, presence: true, uniqueness: { case_sensitive: false }

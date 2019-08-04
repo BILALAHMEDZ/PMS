@@ -2,7 +2,7 @@
 
 class Project < ApplicationRecord
   belongs_to :client
-  has_many :payments
+  has_many :payments, dependent: :destroy
   belongs_to :manager
   belongs_to :creater, class_name: 'User'
   has_and_belongs_to_many :employees, join_table: 'employees_projects'
