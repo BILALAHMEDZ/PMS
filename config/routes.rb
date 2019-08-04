@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   namespace :employee do
     resources :timelogs
     resources :comments
+    resources :clients, only: [:index]
+    resources :projects, only: [:index]
   end
 
   root 'users#index'

@@ -55,4 +55,5 @@
   <%elsif current_user.manager?%>
      <%= link_to fa_icon('plus-square', text: 'Add Project'), new_manager_project_path , class: 'btn btn-primary' %>
   <%end%>
+  <%= paginate @projects %>
 </div>

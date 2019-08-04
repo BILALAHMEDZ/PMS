@@ -6,7 +6,7 @@
       <%= submit_tag 'Search', class: 'btn btn-primary float-left ml-1'%>
     <%end%>
     <%= form_tag admin_users_path, method: 'get' do %>
-      <%= select_tag(:search, '<option value="" hidden>Search By Role</option><option value="Admin">Admin</option><option value="Manager">Manager</option><option value="User">User</option>'.html_safe, class: 'form-control col-3 float-left ml-1') %>
+      <%= select_tag(:search, '<option value="" hidden>Search By Role</option><option value="Admin">Admin</option><option value="Manager">Manager</option><option value="Employee">Employee</option>'.html_safe, class: 'form-control col-3 float-left ml-1') %>
     <%= submit_tag 'Search', class: 'btn btn-primary float-left ml-1'%>
     <%end%>
     <%= form_tag admin_users_path, method: 'get' do %>

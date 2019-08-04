@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Project < ApplicationRecord
+  paginates_per 5
   belongs_to :client
   has_many :payments, dependent: :destroy
   belongs_to :manager
