@@ -2,7 +2,9 @@
 
 class PaymentsBaseController < ApplicationController
   def index
-    @payments = Payment.all
+    @project = Project.find_by_id(params[:project_id])
+    render file: 'public/404.html', status: :not_found, layout: false unless @project
+    @payments = @project.payments
   end
 
   def new

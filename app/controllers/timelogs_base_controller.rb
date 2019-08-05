@@ -2,7 +2,9 @@
 
 class TimelogsBaseController < ApplicationController
   def index
-    @timelogs = Timelog.all
+    @project = Project.find_by_id(params[:project_id])
+    render file: 'public/404.html', status: :not_found, layout: false unless @project
+    @timelogs = @project.timelogs
   end
 
   def new

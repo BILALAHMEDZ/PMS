@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_805_060_253) do
+ActiveRecord::Schema.define(version: 20_190_805_133_255) do
   create_table 'clients', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name'
     t.string 'email'
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20_190_805_060_253) do
     t.string 'name'
     t.string 'status'
     t.string 'type'
+    t.string 'image'
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end

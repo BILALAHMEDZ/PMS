@@ -5,12 +5,13 @@
     <thead>
       <tr>
         <th><strong>Hours</strong></th>
-        <th><strong>Actions</strong></th>
+        <th><strong>Employee</strong></th>
       </tr>
     </thead>
     <tbody>
         <tr>
           <td><%= @timelog.hours %></td>
+          <td><%= @timelog.employee.name %></td>
         </tr>
     </tbody>
   </table>

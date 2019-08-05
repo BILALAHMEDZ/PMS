@@ -5,6 +5,7 @@
     <thead>
       <tr>
         <th>Hours</th>
+        <th>Employee</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -12,7 +13,8 @@
       <% @timelogs.each do |timelog| %>
         <tr>
           <td><%= timelog.hours %></td>
-          <td>
+          <td><%= timelog.employee.name %></td>
+          <td>s
             <%if current_user.admin?%>
               <%= link_to '', admin_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-eye' %>
               <%= link_to '', edit_admin_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-pencil' %>

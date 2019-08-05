@@ -1,0 +1,20 @@
+<% title "-All Timelogs" %>
+<div class="container">
+  <div>
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th>Hours</th>
+        <th>Employee</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @timelogs.each do |timelog| %>
+        <tr>
+          <td><%= timelog.hours %></td>
+          <td><%= timelog.employee.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

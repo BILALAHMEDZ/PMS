@@ -46,6 +46,7 @@
               <%= link_to '', manager_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
                 <%= link_to '', manager_assigned_employees_path(project) , class: 'btn btn-primary fa fa-group' %>
                 <%= link_to '', manager_project_payments_path(project) , class: 'btn btn-primary fa fa-money' %>
+                <%= link_to '', manager_project_timelogs_path(project) , class: 'btn btn-primary fa fa-clock-o' %>
             </td>
             <%end%>
           </td>

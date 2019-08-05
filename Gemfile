@@ -40,10 +40,12 @@ gem 'rubocop-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
+gem 'carrierwave', '~> 0.10.0'
 gem 'chosen-rails'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem 'jquery-rails'
 gem 'kaminari'
+gem 'mini_magick', '~> 4.3'
 gem 'pundit'
 
 group :development, :test do

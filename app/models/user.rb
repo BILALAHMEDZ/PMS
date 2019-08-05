@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :name, presence: true
   paginates_per 5
+  mount_uploader :image, ImageUploader
   has_many :projects
   has_many :payments
   scope :all_except, ->(user) { where.not(id: user) }
