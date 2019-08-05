@@ -1,0 +1,30 @@
+<% title "-All Clients" %>
+<div class="container">
+  <table class="table table-striped" id="myTable">
+    <thead>
+      <tr>
+        <th><strong>Name</strong></th>
+        <th><strong>Phone</strong></th>
+        <th><strong>Email</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= @client.name %></td>
+          <td><%= @client.phone %></td>
+          <td><%= @client.email %></td>
+          <td>
+        </tr>
+    </tbody>
+  </table>
+  <h1>Projects</h1>
+  <ul class="list-group">
+    <% @client.projects.each do |project| %>
+      <li class = "list-group-item list-group-item-success"><%= project.title %></li>
+    <% end %>
+  </ul>
+  <div class="clearfix mb-3"></div>
+  <div class="actions">
+    <%= link_to "Back", :back, class: 'btn btn-success' %>
+  </div>
+</div>
