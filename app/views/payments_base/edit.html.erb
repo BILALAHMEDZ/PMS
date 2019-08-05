@@ -7,10 +7,6 @@
       <%= f.text_field :payment, class: "form-control"%>
     </div>
     <div class="clearfix mb-3"></div>
-    <div class="field">
-     <%= f.select :project_id, ("<option value=''>Select Project</option>" + options_from_collection_for_select(Project.all, :id, :title, :selected => f.object.project_id)).html_safe, {}, { id: 'choose-client', :class => 'chosen-select'} %>
-     </div>
-    <div class="clearfix mb-3"></div>
     <div class="actions">
       <%= f.submit "Update" ,class: "btn btn-primary"%>
       <%= link_to "Back", :back, class: 'btn btn-success' %>

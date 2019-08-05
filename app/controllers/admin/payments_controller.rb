@@ -9,6 +9,6 @@ class Admin::PaymentsController < PaymentsBaseController
   end
 
   def my_payment
-    admin_payments_path
+    admin_project_payments_path
   end
 end

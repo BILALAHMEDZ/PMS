@@ -15,6 +15,7 @@ class PaymentsBaseController < ApplicationController
 
   def create
     @payment = Payment.new(payment_params)
+    @payment.project_id = params[:project_id]
     @payment.creater_id = current_user.id
     if @payment.save
       redirect_to my_payment, notice: 'Payment was successfully created.'
@@ -50,6 +51,6 @@ class PaymentsBaseController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:payment, :project_id)
+    params.require(:payment).permit(:payment)
   end
 end
