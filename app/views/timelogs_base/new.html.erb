@@ -3,7 +3,7 @@
   <%if current_user.admin?%>
     <%= render 'form', timelog: @timelog %>
   <%elsif current_user.employee?%>
-    <%= render 'form', timelog: @timelog %>
+    <%= render 'form1', timelog: @timelog %>
   <%end%>
 </div>
 

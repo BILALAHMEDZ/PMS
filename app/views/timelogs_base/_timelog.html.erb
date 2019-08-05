@@ -14,13 +14,13 @@
           <td><%= timelog.hours %></td>
           <td>
             <%if current_user.admin?%>
-              <%= link_to '', admin_timelog_path(timelog) , class: 'btn btn-primary fa fa-eye' %>
-              <%= link_to '', edit_admin_timelog_path(timelog) , class: 'btn btn-primary fa fa-pencil' %>
-              <%= link_to '', admin_timelog_path(timelog) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+              <%= link_to '', admin_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-eye' %>
+              <%= link_to '', edit_admin_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-pencil' %>
+              <%= link_to '', admin_project_timelog_path(timelog.project,timelog) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
             <%elsif current_user.employee?%>
-              <%= link_to '', employee_timelog_path(timelog) , class: 'btn btn-primary fa fa-eye' %>
-              <%= link_to '', edit_employee_timelog_path(timelog) , class: 'btn btn-primary fa fa-pencil' %>
-              <%= link_to '', employee_timelog_path(timelog) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+              <%= link_to '', employee_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-eye' %>
+              <%= link_to '', edit_employee_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-pencil' %>
+              <%= link_to '', employee_project_timelog_path(timelog.project,timelog) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
             <%end%>
           </td>
         </tr>
@@ -28,8 +28,10 @@
     </tbody>
   </table>
   <%if current_user.admin?%>
-    <%= link_to fa_icon('plus-square', text: 'Add timelog'), new_admin_timelog_path , class: 'btn btn-primary' %>
+    <%= link_to fa_icon('plus-square', text: 'Add Timelog'), new_admin_project_timelog_path , class: 'btn btn-primary' %>
+    <%= link_to "Back", :back, class: 'btn btn-success' %>
   <%elsif current_user.employee?%>
-     <%= link_to fa_icon('plus-square', text: 'Add timelog'), new_employee_timelog_path , class: 'btn btn-primary' %>
+     <%= link_to fa_icon('plus-square', text: 'Add Timelog'), new_employee_project_timelog_path , class: 'btn btn-primary' %>
+     <%= link_to "Back", :back, class: 'btn btn-success' %>
   <%end%>
 </div>

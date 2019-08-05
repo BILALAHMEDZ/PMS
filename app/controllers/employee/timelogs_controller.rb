@@ -9,6 +9,6 @@ class Employee::TimelogsController < TimelogsBaseController
   end
 
   def my_timelog
-    employee_timelogs_path
+    employee_project_timelogs_path
   end
 end

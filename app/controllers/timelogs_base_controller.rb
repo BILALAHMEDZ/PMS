@@ -14,11 +14,23 @@ class TimelogsBaseController < ApplicationController
   end
 
   def create
-    @timelog = Timelog.new(timelog_params)
-    if @timelog.save
-      redirect_to my_timelog, notice: 'Timelog was successfully created.'
-    else
-      render :new
+    if current_user.admin?
+      @timelog = Timelog.new(timelog_params)
+      @timelog.project_id = params[:project_id]
+      if @timelog.save
+        redirect_to my_timelog, notice: 'Timelog was successfully created.'
+      else
+        render :new
+      end
+    elsif current_user.employee?
+      @timelog = Timelog.new(employee_timelog_params)
+      @timelog.project_id = params[:project_id]
+      @timelog.employee_id = current_user.id
+      if @timelog.save
+        redirect_to my_timelog, notice: 'Timelog was successfully created.'
+      else
+        render :new
+      end
     end
   end
 
@@ -49,6 +61,10 @@ class TimelogsBaseController < ApplicationController
   end
 
   def timelog_params
+    params.require(:timelog).permit(:hours, :employee_id)
+  end
+
+  def employee_timelog_params
     params.require(:timelog).permit(:hours)
   end
 end
