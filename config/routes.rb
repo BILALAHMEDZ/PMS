@@ -3,26 +3,29 @@
 Rails.application.routes.draw do
   namespace :manager do
     resources :clients
-    resources :projects
-    resources :payments
+    resources :projects do
+      resources :payments
+    end
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
 
   namespace :admin do
-    resources :timelogs
     resources :clients
     resources :users
-    resources :projects
-    resources :payments
+    resources :projects do
+      resources :payments
+      resources :timelogs
+    end
     resources :comments
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
 
   namespace :employee do
-    resources :timelogs
     resources :comments
-    resources :clients, only: [:index]
-    resources :projects, only: [:index]
+    resources :clients, only: %i[index show]
+    resources :projects do
+      resources :timelogs
+    end
   end
 
   root 'users#index'

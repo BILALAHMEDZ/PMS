@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.manager?
       redirect_to manager_clients_path, notice: 'User was successfully updated.'
     elsif current_user.employee?
-      redirect_to employee_timelogs_path, notice: 'User was successfully updated.'
+      redirect_to employee_projects_path, notice: 'User was successfully updated.'
     end
   end
 
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.manager?
       manager_clients_url
     elsif current_user.employee?
-      employee_timelogs_url
+      employee_projects_url
     end
   end
 
@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.manager?
       return manager_clients_path
     elsif current_user.employee?
-      return employee_timelogs_path
+      return employee_projects_path
     else
       return root_url
     end

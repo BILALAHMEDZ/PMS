@@ -11,14 +11,14 @@
   <table class="table table-striped" id="myTable">
     <thead>
       <tr>
-        <th><strong>Title</strong></th>
-        <th><strong>Description</strong></th>
-        <th><strong>hours_spent</strong></th>
-        <th><strong>Amount</strong></th>
-        <th><strong>Client</strong></th>
-        <th><strong>Manager</strong></th>
-        <th><strong>Created By</strong></th>
-        <th><strong>Actions</strong></th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>hours_spent</th>
+        <th>Amount</th>
+        <th>Client</th>
+        <th>Manager</th>
+        <th>Created By</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -37,12 +37,15 @@
               <%= link_to '', edit_admin_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
               <%= link_to '', admin_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
                 <%= link_to '', admin_assigned_employees_path(project) , class: 'btn btn-primary fa fa-group' %>
+                <%= link_to '', admin_project_payments_path(project) , class: 'btn btn-primary fa fa-money' %>
+                <%= link_to '', admin_project_timelogs_path(project) , class: 'btn btn-primary fa fa-clock-o' %>
               </td>
             <%elsif current_user.manager?%>
               <%= link_to '', manager_project_path(project) , class: 'btn btn-primary fa fa-eye' %>
               <%= link_to '', edit_manager_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
               <%= link_to '', manager_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
                 <%= link_to '', manager_assigned_employees_path(project) , class: 'btn btn-primary fa fa-group' %>
+                <%= link_to '', manager_project_payments_path(project) , class: 'btn btn-primary fa fa-money' %>
             </td>
             <%end%>
           </td>

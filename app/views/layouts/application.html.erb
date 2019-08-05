@@ -16,7 +16,7 @@
           <%elsif current_user.manager?%>
             <%= link_to fa_icon('home', text: 'PMS'), manager_clients_path ,class: 'nav-link text-light' %>
           <%elsif current_user.employee? %>
-            <%= link_to fa_icon('home', text: 'PMS'), employee_timelogs_path ,class: 'nav-link text-light' %>
+            <%= link_to fa_icon('home', text: 'PMS'), employee_clients_path ,class: 'nav-link text-light' %>
           <%end%>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="
             navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,15 +38,6 @@
                 <li class="nav-item">
                     <%= link_to 'Projects', admin_projects_path ,class: 'nav-link text-light' %>
                 </li>
-                <li class="nav-item">
-                    <%= link_to 'Payments', admin_payments_path ,class: 'nav-link text-light' %>
-                </li>
-                <li class="nav-item">
-                    <%= link_to 'Timelogs', admin_timelogs_path ,class: 'nav-link text-light' %>
-                </li>
-                <li class="nav-item">
-                    <%= link_to 'Comments', admin_comments_path ,class: 'nav-link text-light' %>
-                </li>
               </ul>
             <% elsif current_user.manager? %>
               <ul class="navbar-nav mr-auto">
@@ -56,23 +47,17 @@
                  <li class="nav-item">
                     <%= link_to 'Projects', manager_projects_path ,class: 'nav-link text-light' %>
                 </li>
-                 <li class="nav-item">
-                    <%= link_to 'Payments', manager_payments_path ,class: 'nav-link text-light' %>
-                </li>
               </ul>
             <% elsif current_user.employee? %>
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <%= link_to 'Timelogs', employee_timelogs_path ,class: 'nav-link text-light' %>
-                </li>
-                <li class="nav-item">
-                    <%= link_to 'Comments', employee_comments_path ,class: 'nav-link text-light' %>
+                    <%= link_to 'Projects', employee_projects_path ,class: 'nav-link text-light' %>
                 </li>
                 <li class="nav-item">
                     <%= link_to 'Clients', employee_clients_path ,class: 'nav-link text-light' %>
                 </li>
                 <li class="nav-item">
-                    <%= link_to 'Projects', employee_projects_path ,class: 'nav-link text-light' %>
+                    <%= link_to 'Comments', employee_comments_path ,class: 'nav-link text-light' %>
                 </li>
               </ul>
             <% end %>

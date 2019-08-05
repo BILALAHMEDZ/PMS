@@ -12,6 +12,7 @@
         <th><strong>Client</strong></th>
         <th><strong>Manager</strong></th>
         <th><strong>Created By</strong></th>
+        <th><strong>Actions</strong></th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +25,9 @@
           <td><%= project.client.name %></td>
           <td><%= project.manager.name %></td>
           <td><%= project.creater.name %></td>
+          <td>
+            <%= link_to '', employee_project_timelogs_path(project) , class: 'btn btn-primary fa fa-clock-o' %>
+          </td>
         </tr>
       <% end %>
     </tbody>
