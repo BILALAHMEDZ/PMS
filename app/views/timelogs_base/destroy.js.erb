@@ -1,0 +1,3 @@
+<% @timelogs = @project.timelogs.order(:created_at) %>;
+$('#timelog-index').empty();
+$('#timelog-index').append("<%= j render 'timelogs_base/timelog', timelogs: @timelogs %>");

@@ -1,0 +1,7 @@
+<%if current_user.admin?%>
+  $("#timelog-modal").html("<%= j (render 'edit', timelog: @timelog, project: @project) %>");
+  $("#timelog-modal").modal('show');
+<%elsif current_user.employee?%>
+  $("#timelog-modal").html("<%= j (render 'edit1', timelog: @timelog, project: @project) %>");
+  $("#timelog-modal").modal('show');
+<%end%>

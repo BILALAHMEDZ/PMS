@@ -26,7 +26,7 @@
           <td><%= project.manager.name %></td>
           <td><%= project.creater.name %></td>
           <td>
-            <%= link_to '', employee_project_timelogs_path(project) , class: 'btn btn-primary fa fa-clock-o' %>
+            <%= link_to '', employee_project_path(project) , class: 'btn btn-primary fa fa-eye' %>
           </td>
         </tr>
       <% end %>

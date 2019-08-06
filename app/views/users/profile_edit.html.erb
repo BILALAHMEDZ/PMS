@@ -2,15 +2,13 @@
 <div class="container">
   <%= form_with(model: @user, url: {action: 'profile_update'}, class: 'form-vertical' , local: true) do |f| %>
     <%= render 'errors', user: @user %>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image %>
-    <% if f.object.image? %>
-      <%= image_tag f.object.image.thumb.url %>
-      <%= f.label :remove_image %>
-      <%= f.check_box :remove_image %>
-    <% end %>
-  </div>
+<% if current_user.image.url.present? %>
+   <%= image_tag(current_user.image.url(:thumb).to_s, class: 'img-circle' ) %>
+ <% end %>
+ <div class="form-group">
+   <%= f.label :image %>
+   <%= f.file_field :image, class: 'form-control' %>
+ </div>
     <div class="field">
       <%= f.label :name %>
       <%= f.text_field :name ,class: "form-control"%>

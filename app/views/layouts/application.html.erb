@@ -51,13 +51,10 @@
             <% elsif current_user.employee? %>
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <%= link_to 'Projects', employee_projects_path ,class: 'nav-link text-light' %>
-                </li>
-                <li class="nav-item">
                     <%= link_to 'Clients', employee_clients_path ,class: 'nav-link text-light' %>
                 </li>
                 <li class="nav-item">
-                    <%= link_to 'Comments', employee_comments_path ,class: 'nav-link text-light' %>
+                    <%= link_to 'Projects', employee_projects_path ,class: 'nav-link text-light' %>
                 </li>
               </ul>
             <% end %>

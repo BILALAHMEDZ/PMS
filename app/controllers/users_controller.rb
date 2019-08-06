@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def profile_update
     find_user
     if @user.update(user_params)
-      red_to_ind
+      redirect_to edit_profile_path, notice: 'User was successfully updated.'
     else
       render :profile_edit
     end
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(klass.to_s.underscore).permit(:name, :email)
+    params.require(klass.to_s.underscore).permit(:name, :email, :image)
   end
 
   def klass

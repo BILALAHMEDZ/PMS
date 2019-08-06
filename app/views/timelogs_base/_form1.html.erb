@@ -1,12 +1,24 @@
-<%= form_with(model: @timelog, url: {action: 'create'}, class: 'form-vertical' , local: true) do |f| %>
-  <%= render 'errors', timelog: @timelog %>
-  <div class="field">
-    <%= f.label :hours %>
-    <%= f.text_field :hours, class: "form-control"%>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">New Timelog</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <%= form_with(model: @timelog, url: employee_project_timelogs_path(@project.id), remote: true) do |f| %>
+          <%= render 'errors', timelog: @timelog %>
+          <div class="field">
+            <%= f.label :hours %>
+            <%= f.text_field :hours, class: "form-control"%>
+          </div>
+          <div class="clearfix mb-3"></div>
+          <div class="actions">
+            <%= f.submit "Create" ,class: "btn btn-primary"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="clearfix mb-3"></div>
-  <div class="actions">
-    <%= f.submit "Create" ,class: "btn btn-primary"%>
-    <%= link_to "Back", :back, class: 'btn btn-success' %>
-  </div>
-<% end %>

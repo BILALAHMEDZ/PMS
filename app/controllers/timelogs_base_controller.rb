@@ -8,6 +8,7 @@ class TimelogsBaseController < ApplicationController
   end
 
   def new
+    @project = Project.find(params[:project_id])
     @timelog = Timelog.new
   end
 
@@ -17,42 +18,45 @@ class TimelogsBaseController < ApplicationController
 
   def create
     if current_user.admin?
-      @timelog = Timelog.new(timelog_params)
-      @timelog.project_id = params[:project_id]
-      if @timelog.save
-        redirect_to my_timelog, notice: 'Timelog was successfully created.'
-      else
-        render :new
+      @project = Project.find(params[:project_id])
+      @timelog = @project.timelogs.new(timelog_params)
+      respond_to do |format|
+        format.js
       end
     elsif current_user.employee?
-      @timelog = Timelog.new(employee_timelog_params)
-      @timelog.project_id = params[:project_id]
+      @project = Project.find(params[:project_id])
+      @timelog = @project.timelogs.new(employee_timelog_params)
       @timelog.employee_id = current_user.id
-      if @timelog.save
-        redirect_to my_timelog, notice: 'Timelog was successfully created.'
-      else
-        render :new
+      respond_to do |format|
+        format.js
       end
     end
   end
 
   def edit
     find_timelog
+    @project = Project.find(params[:project_id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
     find_timelog
-    if @timelog.update(timelog_params)
-      redirect_to my_timelog, notice: 'Timelog was successfully updated.'
-    else
-      render :edit
+    @timelog.assign_attributes(timelog_params)
+    @project = Project.find(params[:project_id])
+    respond_to do |format|
+      format.js
     end
   end
 
   def destroy
     find_timelog
+    @project = @timelog.project
     @timelog.destroy
-    redirect_to my_timelog, notice: 'Timelog was successfully destroyed.'
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

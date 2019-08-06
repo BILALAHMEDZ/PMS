@@ -45,9 +45,8 @@ gem 'chosen-rails'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem 'jquery-rails'
 gem 'kaminari'
-gem 'mini_magick', '~> 4.3'
 gem 'pundit'
-
+gem 'rmagick'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug' # , platforms: %i[mri mingw x64_mingw]

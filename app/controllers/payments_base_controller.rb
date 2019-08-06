@@ -20,6 +20,7 @@ class PaymentsBaseController < ApplicationController
     @project = Project.find(params[:project_id])
     @payment = @project.payments.new(payment_params)
     @payment.creater_id = current_user.id
+
     respond_to do |format|
       format.js
     end

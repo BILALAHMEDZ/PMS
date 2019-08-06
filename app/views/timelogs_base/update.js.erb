@@ -1,0 +1,10 @@
+<% if @timelog.save %>
+  $('#timelog-modal').modal('hide');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
+<% else %>
+  $('#timelog-errors').html("<%= j render 'shared/error_messages', resource: @timelog %>")
+<% end %>
+<% @timelogs = @project.timelogs %>
+$('#timelog-index').empty();
+$('#timelog-index').append("<%= j render 'timelogs_base/timelog', timelog: @timelog, project: @project %>");

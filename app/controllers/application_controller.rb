@@ -8,16 +8,6 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery
 
-  def red_to_ind
-    if current_user.admin?
-      redirect_to admin_users_path, notice: 'User was successfully updated.'
-    elsif current_user.manager?
-      redirect_to manager_clients_path, notice: 'User was successfully updated.'
-    elsif current_user.employee?
-      redirect_to employee_projects_path, notice: 'User was successfully updated.'
-    end
-  end
-
   def after_sign_in_path_for(_resource)
     if current_user.admin?
       admin_users_url
