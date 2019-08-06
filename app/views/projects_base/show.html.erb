@@ -1,25 +1,131 @@
 <% title "-Project" %>
 <div class="container">
-  <div>
-  <table class="table table-striped" id="myTable">
-    <thead>
-      <tr>
-        <th><strong>Title</strong></th>
-        <th><strong>Description</strong></th>
-        <th><strong>hours_spent</strong></th>
-        <th><strong>Amount</strong></th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><%= @project.title %></td>
-          <td><%= @project.description %></td>
-          <td><%= @project.hours_spent %></td>
-          <td><%= @project.amount %></td>
-        </tr>
-    </tbody>
-  </table>
-  <div class="actions">
-      <%= link_to "Back", :back, class: 'btn btn-success' %>
+  <div class="row">
+    <div class="container">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded ml-4">
+          <h1>Projects</h1>
+          <table class="table table-striped" id="myTable">
+            <thead>
+              <tr>
+                <th><strong>Title</strong></th>
+                <th><strong>Description</strong></th>
+                <th><strong>hours_spent</strong></th>
+                <th><strong>Amount</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td><%= @project.title %></td>
+                  <td><%= @project.description %></td>
+                  <td><%= @project.hours_spent %></td>
+                  <td><%= @project.amount %></td>
+                </tr>
+            </tbody>
+          </table>
+        <div class="actions">
+            <%= link_to "Back", :back, class: 'btn btn-success' %>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="clearfix mb-3"></div>
+  <div class="row">
+    <div class="container">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded ml-4">
+        <h1>Payments</h1>
+        <div id="payment-index">
+          <%= render 'payments_base/payment', payment: @payment %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded ml-4">
+        <h1>Timelogs</h1>
+        <table class="table table-striped" id="myTable">
+          <thead>
+            <tr>
+              <th>Hours</th>
+              <th>Employee</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @timelogs.each do |timelog| %>
+              <tr>
+                <td><%= timelog.hours %></td>
+                <td><%= timelog.employee.name %></td>
+                <td>
+                  <% if current_user.admin? %>
+                    <%= link_to '', admin_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-eye' %>
+                    <%= link_to '', edit_admin_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-pencil' %>
+                    <%= link_to '', admin_project_timelog_path(timelog.project,timelog) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+                  <% elsif current_user.employee? %>s
+                    <%= link_to '', employee_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-eye' %>
+                    <%= link_to '', edit_employee_project_timelog_path(timelog.project,timelog) , class: 'btn btn-primary fa fa-pencil' %>
+                    <%= link_to '', employee_project_timelog_path(timelog.project,timelog) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+                  <%end%>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%if current_user.admin?%>
+          <%= link_to fa_icon('plus-square', text: 'Add Timelog'), new_admin_project_timelog_path(@project) , class: 'btn btn-primary' %>
+        <%elsif current_user.employee?%>
+          <%= link_to fa_icon('plus-square', text: 'Add Timelog'), new_employee_project_timelog_path(@project) , class: 'btn btn-primary' %>
+        <%end%>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>

@@ -1,0 +1,7 @@
+<%if current_user.admin?%>
+  $("#payment-modal").html("<%= j (render 'edit', payment: @payment, project: @project) %>");
+  $("#payment-modal").modal('show');
+<%elsif current_user.manager?%>
+  $("#payment-modal").html("<%= j (render 'edit1', payment: @payment, project: @project) %>");
+  $("#payment-modal").modal('show');
+<%end%>

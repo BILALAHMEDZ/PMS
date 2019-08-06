@@ -5,6 +5,7 @@ class Project < ApplicationRecord
   belongs_to :client
   has_many :payments, dependent: :destroy
   belongs_to :manager
+  has_many :comments, as: :commentable
   belongs_to :creater, class_name: 'User'
   has_many :timelogs, dependent: :destroy
   has_and_belongs_to_many :employees, join_table: 'employees_projects'

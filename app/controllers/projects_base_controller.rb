@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProjectsBaseController < ApplicationController
+  before_action :set_timelogs, only: [:show]
+  before_action :set_payments, only: [:show]
   def index
     @projects = Project.search(params[:search]).order(:created_at).page(params[:page])
   end
@@ -63,6 +65,16 @@ class ProjectsBaseController < ApplicationController
   end
 
   private
+
+  def set_payments
+    find_project
+    @payments = @project.payments.order(:created_at).page(params[:page])
+ end
+
+  def set_timelogs
+    find_project
+    @timelogs = @project.timelogs.order(:created_at).page(params[:page])
+ end
 
   def find_project
     @project = Project.find_by_id(params[:id])

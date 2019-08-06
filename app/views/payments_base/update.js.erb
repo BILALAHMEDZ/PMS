@@ -1,0 +1,10 @@
+<% if @payment.save %>
+  $('#payment-modal').modal('hide');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
+<% else %>
+  $('#payment-errors').html("<%= j render 'shared/error_messages', resource: @payment %>")
+<% end %>
+<% @payments = @project.payments %>
+$('#payment-index').empty();
+$('#payment-index').append("<%= j render 'payments_base/payment', payment: @payment, project: @project %>");

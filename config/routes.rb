@@ -17,18 +17,17 @@ Rails.application.routes.draw do
       resources :payments
       resources :timelogs
     end
-    resources :comments
+
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
 
   namespace :employee do
-    resources :comments
     resources :clients, only: %i[index show]
     resources :projects do
       resources :timelogs
     end
   end
-
+  resources :comments
   root 'users#index'
   devise_for :users
   resources :users

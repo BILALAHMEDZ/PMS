@@ -1,17 +1,17 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">New Payment</h5>
+      <h5 class="modal-title">Update Payment</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <div class="container">
-        <%= form_with(model: @payment, url: admin_project_payments_path(@project.id), remote: true) do |form| %>
+        <%= form_with(model: payment, url: admin_project_payment_path(payment.project.id,@payment), remote: true) do |form| %>
           <% if @payment.errors.any? %>
-            <div id="payment-errors">
-
+            <div id="error_explanation">
+              <%= render 'shared/error', error: @payment%>
             </div>
           <% end %>
           <div class="form-group">
@@ -19,9 +19,13 @@
             <%= form.text_field :payment, class: 'form-control' %>
           </div>
           <div class="form-group">
-            <%= form.submit "Save Payment", class: 'btn btn-success' %>
+            <%= form.submit "Update", class: 'btn btn-success' %>
           </div>
         <% end %>
       </div>
     </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
   </div>
+</div>

@@ -8,6 +8,7 @@ class PaymentsBaseController < ApplicationController
   end
 
   def new
+    @project = Project.find(params[:project_id])
     @payment = Payment.new
   end
 
@@ -16,33 +17,38 @@ class PaymentsBaseController < ApplicationController
   end
 
   def create
-    @payment = Payment.new(payment_params)
-    @payment.project_id = params[:project_id]
+    @project = Project.find(params[:project_id])
+    @payment = @project.payments.new(payment_params)
     @payment.creater_id = current_user.id
-    if @payment.save
-      redirect_to my_payment, notice: 'Payment was successfully created.'
-    else
-      render :new
+    respond_to do |format|
+      format.js
     end
   end
 
   def edit
     find_payment
+    @project = Project.find(params[:project_id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
     find_payment
-    if @payment.update(payment_params)
-      redirect_to my_payment, notice: 'Payment was successfully updated.'
-    else
-      render :edit
+    @payment.assign_attributes(payment_params)
+    @project = Project.find(params[:project_id])
+    respond_to do |format|
+      format.js
     end
   end
 
   def destroy
     find_payment
+    @project = @payment.project
     @payment.destroy
-    redirect_to my_payment, notice: 'Payment was successfully destroyed.'
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
