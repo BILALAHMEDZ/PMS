@@ -23,8 +23,12 @@ ActiveRecord::Schema.define(version: 20_190_805_133_255) do
 
   create_table 'comments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'message'
+    t.integer 'commentable_id'
+    t.string 'commentable_type'
+    t.bigint 'creater_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.index ['creater_id'], name: 'index_comments_on_creater_id'
   end
 
   create_table 'employees_projects', id: false, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
