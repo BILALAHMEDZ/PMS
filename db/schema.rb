@@ -12,7 +12,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_805_133_255) do
+ActiveRecord::Schema.define(version: 20_190_806_135_306) do
+  create_table 'attachments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.bigint 'project_id'
+    t.string 'attachment'
+    t.index ['project_id'], name: 'index_attachments_on_project_id'
+  end
+
   create_table 'clients', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name'
     t.string 'email'

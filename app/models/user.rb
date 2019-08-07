@@ -10,6 +10,7 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   has_many :projects
   has_many :payments
+  has_many :comments, foreign_key: 'creater_id'
   scope :all_except, ->(user) { where.not(id: user) }
   TYPE_ADMIN = 'Admin'
   TYPE_MANAGER = 'Manager'

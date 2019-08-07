@@ -2,10 +2,9 @@
   $('#timelog-modal').modal('hide');
   $('body').removeClass('modal-open');
   $('.modal-backdrop').remove();
+  <% @timelogs = @project.timelogs.order(:id).page(params[:page]) %>
+  $('#timelog-index').empty();
+  $('#timelog-index').append("<%= j render 'timelogs_base/timelog', timelog: @timelog, project: @project %>");
 <% else %>
   $('#timelog-errors').html("<%= j render 'errors', timelog: @timelog %>")
 <% end %>
-
-<% @timelogs = @project.timelogs %>
-$('#timelog-index').empty();
-$('#timelog-index').append("<%= j render 'timelogs_base/timelog', timelog: @timelog, project: @project %>");

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :comments
   namespace :manager do
     resources :clients
     resources :projects do
       resources :payments
-      resources :attachments
       resources :timelogs, only: %i[index]
     end
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     resources :projects do
       resources :payments
       resources :timelogs
-      resources :attachments
     end
 
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
@@ -29,14 +28,11 @@ Rails.application.routes.draw do
       resources :timelogs
     end
   end
-
   resources :projects do
     resources :attachments
   end
+  post '/comments', to: 'comments#create'
   resources :attachments, only: [:destroy]
-
-  resources :comments
-
   root 'users#index'
   devise_for :users
   resources :users

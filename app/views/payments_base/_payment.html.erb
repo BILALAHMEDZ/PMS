@@ -16,7 +16,7 @@
           <td><%= payment.creater.name %></td>
           <td>
             <%if current_user.admin?%>
-              <%= link_to '', admin_project_payments_path(payment.project,payment) , class: 'btn btn-primary fa fa-eye' %>
+              <%= link_to '', admin_project_payment_path(payment.project,payment) , class: 'btn btn-primary fa fa-eye' %>
               <%= link_to '', edit_admin_project_payment_path(payment.project,payment), remote: true , class: 'btn btn-primary fa fa-pencil' %>
               <%= link_to '', admin_project_payment_path(payment.project,payment) , method: :delete, remote: true, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
             <%elsif current_user.manager?%>

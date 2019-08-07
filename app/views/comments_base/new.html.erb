@@ -1,9 +1,0 @@
-<% title "-Add comment" %>
-<div class="container">
-  <%if current_user.admin?%>
-    <%= render 'form', comment: @comment %>
-  <%elsif current_user.employee?%>
-    <%= render 'form', comment: @comment %>
-  <%end%>
-</div>
-

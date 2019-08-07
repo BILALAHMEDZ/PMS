@@ -9,11 +9,8 @@
     <div class="modal-body">
       <div class="container">
         <%= form_with(model: @payment, url: admin_project_payments_path(@project.id), remote: true) do |form| %>
-          <% if @payment.errors.any? %>
             <div id="payment-errors">
-
             </div>
-          <% end %>
           <div class="form-group">
             <%= form.label :payment %>
             <%= form.text_field :payment, class: 'form-control' %>

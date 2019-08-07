@@ -36,6 +36,8 @@
         <div id="payment-index">
           <%= render 'payments_base/payment', payment: @payment %>
         </div>
+        <div class = "clearfix mb-3"></div>
+          <%= paginate @payments %>
       </div>
     </div>
   </div>
@@ -46,81 +48,44 @@
         <div id="timelog-index">
           <%= render 'timelogs_base/timelog', timelog: @timelog %>
         </div>
+        <div class = "clearfix mb-3"></div>
+          <%= paginate @timelogs %>
       </div>
     </div>
-</div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded ml-4">
+        <h1>Attachments</h1>
+          <%= render partial: 'attachments/show', locals: { attachment: @project }, project: @project %>
+          <%= render partial: 'attachments/new', locals: { attachment: @project } %>
+      </div>
+    </div>
+  </div>
 
-<%= render partial: 'attachments/show', locals: { attachment: @project }, project: @project %>
-<%= render partial: 'attachments/new', locals: { attachment: @project } %>
+  </div>
   <div class="clearfix mb-3"></div>
   <div class="clearfix mb-3"></div>
-
-
   <div class="clearfix mb-3"></div>
-<!--
-<% title "-All Comments" %>
-<div class="container">
-  <div>
-  <table class="table table-striped" id="myTable">
-    <thead>
-      <tr>
-        <th>Comments</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @comments.each do |comment| %>
-        <tr>
-          <td><%= comment.message %></td>
-          <td>
-              <%= link_to '', comment_path(comment) , class: 'btn btn-primary fa fa-eye' %>
-              <%= link_to '', edit_comment_path(comment) , class: 'btn btn-primary fa fa-pencil' %>
-              <%= link_to '', comment_path(comment) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
-          </td>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-    <%= link_to fa_icon('plus-square', text: 'Add comment'), new_comment_path , class: 'btn btn-primary' %>
-</div>
-<%= render 'comments/form'%>
-
-
- -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <div class="row">
+    <div class="container">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded ml-4">
+        <h1>Comments</h1>
+        <div class=" col-md-12">
+          <ul class="nav nav-pills nav-stacked scrollClass">
+            <% @comments.each do |comment| %>
+              <li class="nav-item col-md-12 mb-2">
+                <span><%= image_tag("pms1.jpeg", size: "40x40", alt: "Edit Entry", class: 'float-left ml-3') %>
+                <a class="nav-link active col-9 ml-3 mr-3 float-left" href="#"><%= comment.message %></a></span>
+                <%= link_to '', edit_comment_path(comment), class: 'btn btn-primary fa fa-pencil' %>
+                <%= link_to '', comment_path(comment) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
+              </li>
+            <%end%>
+          </ul>
+          <%= render '/comments/form', commentable_id: @project.id, commentable_type: 'Project'%>
+      </div>
+        <div class = "clearfix mb-3"></div>
+        <%= paginate @comments %>
+    </div>
+  </div>
 </div>

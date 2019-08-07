@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TimelogsBaseController < ApplicationController
+  before_action :set_comments, only: [:show]
   def index
     @project = Project.find_by_id(params[:project_id])
     render file: 'public/404.html', status: :not_found, layout: false unless @project
@@ -13,7 +14,8 @@ class TimelogsBaseController < ApplicationController
   end
 
   def show
-    find_timelog
+    set_timelog
+    @comment = Comment.new
   end
 
   def create
@@ -34,7 +36,7 @@ class TimelogsBaseController < ApplicationController
   end
 
   def edit
-    find_timelog
+    set_timelog
     @project = Project.find(params[:project_id])
     respond_to do |format|
       format.js
@@ -42,7 +44,7 @@ class TimelogsBaseController < ApplicationController
   end
 
   def update
-    find_timelog
+    set_timelog
     @timelog.assign_attributes(timelog_params)
     @project = Project.find(params[:project_id])
     respond_to do |format|
@@ -51,7 +53,7 @@ class TimelogsBaseController < ApplicationController
   end
 
   def destroy
-    find_timelog
+    set_timelog
     @project = @timelog.project
     @timelog.destroy
     respond_to do |format|
@@ -61,13 +63,18 @@ class TimelogsBaseController < ApplicationController
 
   private
 
-  def find_timelog
+  def set_timelog
     @timelog = Timelog.find_by_id(params[:id])
     render file: 'public/404.html', status: :not_found, layout: false unless @timelog
   end
 
   def timelog_params
     params.require(:timelog).permit(:hours, :employee_id)
+  end
+
+  def set_comments
+    set_timelog
+    @comments = @timelog.comments
   end
 
   def employee_timelog_params

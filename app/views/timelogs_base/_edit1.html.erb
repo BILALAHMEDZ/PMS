@@ -9,7 +9,8 @@
     <div class="modal-body">
       <div class="container">
         <%= form_with(model: timelog, url: employee_project_timelog_path(timelog.project.id,@timelog), remote: true) do |f| %>
-          <%= render 'errors', timelog: @timelog %>
+          <div id="timelog-errors">
+          </div>
           <div class="field">
             <%= f.label :hours %>
             <%= f.text_field :hours, class: "form-control"%>
@@ -20,9 +21,6 @@
           </div>
         <%end%>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
   </div>
 </div>

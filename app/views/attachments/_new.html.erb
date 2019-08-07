@@ -1,9 +1,9 @@
 <%= form_for [attachment, Attachment.new] do |form| %>
   <div class="form-group" >
-   <%= form.file_field :attachment ,class: 'form-control' %>
-   <%= form.hidden_field :project_id, :value => @project.id %>
+    <%= form.file_field :attachment ,class: 'form-control' %>
+    <%= form.hidden_field :project_id, :value => @project.id %>
   </div>
   <div class="actions">
-   <%= form.submit "Upload", class:'btn btn-primary' %>
+    <%= form.submit "Upload", class:'btn btn-primary' %>
   </div>
 <% end %>

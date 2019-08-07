@@ -9,11 +9,8 @@
     <div class="modal-body">
       <div class="container">
         <%= form_with(model: payment, url: manager_project_payment_path(payment.project.id,@payment), remote: true) do |form| %>
-          <% if @payment.errors.any? %>
-            <div id="error_explanation">
-              <%= render 'shared/error', error: @payment%>
+            <div id="payment_errors">
             </div>
-          <% end %>
           <div class="form-group">
             <%= form.label :payment %>
             <%= form.text_field :payment, class: 'form-control' %>
@@ -23,9 +20,6 @@
           </div>
         <% end %>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
   </div>
 </div>

@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class PaymentsBaseController < ApplicationController
+  before_action :set_comments, only: [:show]
+
   def index
     @project = Project.find_by_id(params[:project_id])
     render file: 'public/404.html', status: :not_found, layout: false unless @project
-    @payments = @project.payments
+    @payments = @project.payments.order(:id).page(params[:page])
   end
 
   def new
@@ -13,7 +15,8 @@ class PaymentsBaseController < ApplicationController
   end
 
   def show
-    find_payment
+    set_payment
+    @comment = Comment.new
   end
 
   def create
@@ -27,7 +30,7 @@ class PaymentsBaseController < ApplicationController
   end
 
   def edit
-    find_payment
+    set_payment
     @project = Project.find(params[:project_id])
     respond_to do |format|
       format.js
@@ -35,7 +38,7 @@ class PaymentsBaseController < ApplicationController
   end
 
   def update
-    find_payment
+    set_payment
     @payment.assign_attributes(payment_params)
     @project = Project.find(params[:project_id])
     respond_to do |format|
@@ -44,7 +47,7 @@ class PaymentsBaseController < ApplicationController
   end
 
   def destroy
-    find_payment
+    set_payment
     @project = @payment.project
     @payment.destroy
     respond_to do |format|
@@ -54,7 +57,12 @@ class PaymentsBaseController < ApplicationController
 
   private
 
-  def find_payment
+  def set_comments
+    @payment = Payment.find_by_id(params[:id])
+    @comments = @payment.comments
+  end
+
+  def set_payment
     @payment = Payment.find_by_id(params[:id])
     render file: 'public/404.html', status: :not_found, layout: false unless @payment
   end

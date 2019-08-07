@@ -13,7 +13,9 @@ class ProjectsBaseController < ApplicationController
   end
 
   def show
-    find_project
+        @attachments = @project.attachments
+    @project = Project.find_by_id(params[:id])
+    @comment = Comment.new
   end
 
   def create
@@ -33,15 +35,15 @@ class ProjectsBaseController < ApplicationController
   end
 
   def assigned_employees
-    find_project
+    set_project
   end
 
   def edit
-    find_project
+    set_project
   end
 
   def update
-    find_project
+    set_project
     @empls = project_params[:employees]
     @abc = project_params.except(:employees)
     @empls.shift
@@ -60,7 +62,7 @@ class ProjectsBaseController < ApplicationController
   end
 
   def destroy
-    find_project
+    set_project
     @project.destroy
     redirect_to my_project, notice: 'Project was successfully destroyed.'
   end
@@ -68,21 +70,21 @@ class ProjectsBaseController < ApplicationController
   private
 
   def set_payments
-    find_project
+    set_project
     @payments = @project.payments.order(:created_at).page(params[:page])
   end
 
   def set_timelogs
-    find_project
+    set_project
     @timelogs = @project.timelogs.order(:created_at).page(params[:page])
   end
 
   def set_comments
-    find_project
-    @comments = @project.comments
+    @project = Project.find_by_id(params[:id])
+    @comments = @project.comments.order(:id).page(params[:page])
   end
 
-  def find_project
+  def set_project
     @project = Project.find_by_id(params[:id])
     render file: 'public/404.html', status: :not_found, layout: false unless @project
   end

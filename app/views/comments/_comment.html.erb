@@ -28,8 +28,8 @@
     </tbody>
   </table>
   <%if current_user.admin?%>
-    <%= link_to fa_icon('plus-square', text: 'Add comment'), new_admin_comment_path , class: 'btn btn-primary' %>
+    <%= link_to fa_icon('plus-square', text: 'Add comment'), new_comment_path , class: 'btn btn-primary' %>
   <%elsif current_user.employee?%>
-     <%= link_to fa_icon('plus-square', text: 'Add comment'), new_employee_comment_path , class: 'btn btn-primary' %>
+     <%= link_to fa_icon('plus-square', text: 'Add comment'), new_comment_path , class: 'btn btn-primary' %>
   <%end%>
 </div>

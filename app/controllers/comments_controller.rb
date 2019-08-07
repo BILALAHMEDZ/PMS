@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CommentsBaseController < ApplicationController
+class CommentsController < ApplicationController
   def index
-    @comments = Comment.all
+    @comments = Comment.order(:id).page(params[:page])
   end
 
   def new
@@ -10,40 +10,43 @@ class CommentsBaseController < ApplicationController
   end
 
   def show
-    find_comment
+    set_comment
   end
 
   def create
     @comment = Comment.new(comment_params)
+    @comment.commentable_id=params[:commentable_id]
+    @comment.commentable_type=params[:commentable_type]
+    @comment.creater_id = current_user.id
     if @comment.save
-      redirect_to my_comment, notice: 'Comment was successfully created.'
+      redirect_to request.referrer, notice: 'Client was successfully created.'
     else
       render :new
     end
   end
 
   def edit
-    find_comment
+    set_comment
   end
 
   def update
-    find_comment
+    set_comment
     if @comment.update(comment_params)
-      redirect_to my_comment, notice: 'Comment was successfully updated.'
+      redirect_to request.referrer, notice: 'Client was successfully updated.'
     else
       render :edit
     end
   end
 
   def destroy
-    find_comment
+    set_comment
     @comment.destroy
-    redirect_to my_comment, notice: 'Comment was successfully destroyed.'
+      redirect_to request.referrer, notice: 'Client was successfully destroyed.'
   end
 
   private
 
-  def find_comment
+  def set_comment
     @comment = Comment.find_by_id(params[:id])
     render file: 'public/404.html', status: :not_found, layout: false unless @comment
   end
