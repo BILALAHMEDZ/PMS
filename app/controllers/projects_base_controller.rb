@@ -4,7 +4,7 @@ class ProjectsBaseController < ApplicationController
   before_action :set_timelogs, only: [:show]
   before_action :set_payments, only: [:show]
   before_action :set_comments, only: [:show]
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :set_payments, :set_comments]
+  before_action :set_project, only: %i[show edit update destroy set_payments set_comments]
 
   def index
     @projects = Project.search(params[:search]).page(params[:page])
@@ -20,7 +20,7 @@ class ProjectsBaseController < ApplicationController
   end
 
   def create
-    #change
+    # change
     @project = Project.new(project_params.except(:employees))
     @empls = project_params[:employees]
     @empls.shift
@@ -28,7 +28,6 @@ class ProjectsBaseController < ApplicationController
       e = Employee.find(a)
       @project.employees << e
     end
-    @project.creater_id = current_user.id
     if @project.save
       redirect_to my_project, notice: 'Project was successfully created.'
     else
@@ -40,8 +39,7 @@ class ProjectsBaseController < ApplicationController
     set_project
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @empls = project_params[:employees]
@@ -87,6 +85,6 @@ class ProjectsBaseController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :hours_spent, :amount, :client_id, :manager_id, employees: [])
+    params.require(:project).permit(:title, :description, :client_id, :creater_id, :hours_spent, :amount, :manager_id, employees: [])
   end
 end

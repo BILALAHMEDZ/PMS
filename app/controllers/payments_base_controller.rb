@@ -2,7 +2,7 @@
 
 class PaymentsBaseController < ApplicationController
   before_action :set_comments, only: [:show]
-  before_action :set_payment, only: [:show, :edit, :update, :destroy]
+  before_action :set_payment, only: %i[show edit update destroy]
 
   def index
     @project = Project.find_by(id: params[:project_id])
@@ -22,8 +22,6 @@ class PaymentsBaseController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @payment = @project.payments.new(payment_params)
-    @payment.creater_id = current_user.id
-
     respond_to do |format|
       format.js
     end
@@ -65,6 +63,6 @@ class PaymentsBaseController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:payment)
+    params.require(:payment).permit(:payment, :creater_id)
   end
 end

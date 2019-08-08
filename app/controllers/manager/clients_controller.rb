@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Manager::ClientsController < ManagerBaseController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: %i[show edit update destroy]
   def index
     @clients = Client.search(params[:search]).page(params[:page])
   end
@@ -10,8 +10,7 @@ class Manager::ClientsController < ManagerBaseController
     @client = Client.new
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @client = Client.new(client_params)
@@ -22,8 +21,7 @@ class Manager::ClientsController < ManagerBaseController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @client.update(client_params)

@@ -19,5 +19,4 @@ class Project < ApplicationRecord
       all
     end.order(:id)
   end
-
 end

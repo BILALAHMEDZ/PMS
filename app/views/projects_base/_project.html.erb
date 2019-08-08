@@ -22,6 +22,7 @@
       </tr>
     </thead>
     <tbody>
+    <%if current_user.admin?%>
       <% @projects.each do |project| %>
         <tr>
           <td><%= project.title %></td>
@@ -32,22 +33,32 @@
           <td><%= project.manager.name %></td>
           <td><%= project.creater.name %></td>
           <td>
-            <%if current_user.admin?%>
               <%= link_to '', admin_project_path(project) , class: 'btn btn-primary fa fa-eye' %>
               <%= link_to '', edit_admin_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
               <%= link_to '', admin_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
                 <%= link_to '', admin_assigned_employees_path(project) , class: 'btn btn-primary fa fa-group' %>
               </td>
-            <%elsif current_user.manager?%>
-              <%= link_to '', manager_project_path(project) , class: 'btn btn-primary fa fa-eye' %>
+          </td>
+        </tr>
+      <% end %>
+    <%elsif current_user.manager?%>
+      <% @projects.where(:manager_id => current_user.id).or(@projects.where(:creater_id => current_user.id)).each do |project| %>
+        <tr>
+          <td><%= project.title %></td>
+          <td><%= project.description %></td>
+          <td><%= project.hours_spent %></td>
+          <td><%= project.amount %></td>
+          <td><%= project.client.name %></td>
+          <td><%= project.manager.name %></td>
+          <td><%= project.creater.name %></td>
+          <td><%= link_to '', manager_project_path(project) , class: 'btn btn-primary fa fa-eye' %>
               <%= link_to '', edit_manager_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
               <%= link_to '', manager_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
                 <%= link_to '', manager_assigned_employees_path(project) , class: 'btn btn-primary fa fa-group' %>
             </td>
-            <%end%>
-          </td>
         </tr>
       <% end %>
+    <% end %>
     </tbody>
   </table>
   <%if current_user.admin?%>

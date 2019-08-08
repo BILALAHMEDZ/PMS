@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::UsersController < AdminBaseController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: %i[show edit update destroy]
   def index
     @users = User.search(params[:search]).page(params[:page]).all_except(current_user)
   end
@@ -10,8 +10,7 @@ class Admin::UsersController < AdminBaseController
     @user = User.new
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @user = User.new(create_params)
@@ -23,8 +22,7 @@ class Admin::UsersController < AdminBaseController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)

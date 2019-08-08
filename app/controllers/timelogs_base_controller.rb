@@ -2,7 +2,7 @@
 
 class TimelogsBaseController < ApplicationController
   before_action :set_comments, only: [:show]
-  before_action :set_timelog, only: [:show, :edit, :update, :destroy]
+  before_action :set_timelog, only: %i[show edit update destroy]
 
   def index
     @project = Project.find_by(id: params[:project_id])
@@ -65,5 +65,4 @@ class TimelogsBaseController < ApplicationController
     set_timelog
     @comments = @timelog.comments.order(:id).reverse_order
   end
-
 end
