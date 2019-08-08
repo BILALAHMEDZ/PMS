@@ -5,20 +5,28 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   validates :name, presence: true
+
   paginates_per 5
+
   mount_uploader :image, ImageUploader
+
   has_many :projects
   has_many :payments
   has_many :comments, foreign_key: 'creater_id'
+
   scope :all_except, ->(user) { where.not(id: user) }
+
   TYPE_ADMIN = 'Admin'
   TYPE_MANAGER = 'Manager'
   TYPE_EMPLOYEE = 'Employee'
   TYPES = [TYPE_ADMIN, TYPE_MANAGER, TYPE_EMPLOYEE].freeze
+
   STATUS_ENABLED = 'Enabled'
   STATUS_DISABLED = 'Disabled'
   STATUSES = [STATUS_ENABLED, STATUS_DISABLED].freeze
+
   after_initialize :init_default
 
   def admin?
@@ -42,7 +50,7 @@ class User < ApplicationRecord
       where('name LIKE (?) OR email LIKE (?) OR type LIKE (?) OR status LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
     else
       all
-    end
+    end.order(:id)
   end
 
   private

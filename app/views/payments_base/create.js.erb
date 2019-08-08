@@ -2,7 +2,7 @@
   $('#payment-modal').modal('hide');
   $('body').removeClass('modal-open');
   $('.modal-backdrop').remove();
-  <% @payments = @project.payments.order(:id).page(params[:page]) %>
+  <% @payments = @project.payments.order(:id)%>
   $('#payment-index').empty();
   $('#payment-index').append("<%= j render 'payments_base/payment', payment: @payment, project: @project %>");
 <% else %>

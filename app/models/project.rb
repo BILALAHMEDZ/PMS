@@ -5,8 +5,8 @@ class Project < ApplicationRecord
   belongs_to :client
   has_many :payments, dependent: :destroy
   belongs_to :manager
-  has_many :attachments
-  has_many :comments, as: :commentable
+  has_many :attachments, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :creater, class_name: 'User'
   has_many :timelogs, dependent: :destroy
   has_and_belongs_to_many :employees, join_table: 'employees_projects'
@@ -17,6 +17,7 @@ class Project < ApplicationRecord
       where('title LIKE (?)', "%#{search}%")
     else
       all
-    end
+    end.order(:id)
   end
+
 end

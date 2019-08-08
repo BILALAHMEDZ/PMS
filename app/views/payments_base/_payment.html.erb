@@ -1,39 +1,38 @@
-
-  <table class="table table-striped" id="myTable">
-    <thead>
+<table class="table table-striped" id="myTable">
+  <thead>
+    <tr>
+      <th>Payment</th>
+      <th>Project</th>
+      <th>Created By</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payments.each do |payment| %>
       <tr>
-        <th>Payment</th>
-        <th>Project</th>
-        <th>Created By</th>
-        <th>Actions</th>
+        <td><%= payment.payment %>$</td>
+        <td><%= payment.project.title %></td>
+        <td><%= payment.creater.name %></td>
+        <td>
+          <%if current_user.admin?%>
+            <%= link_to '', admin_project_payment_path(payment.project,payment) , class: 'btn btn-primary fa fa-eye' %>
+            <%= link_to '', edit_admin_project_payment_path(payment.project,payment), remote: true , class: 'btn btn-primary fa fa-pencil' %>
+            <%= link_to '', admin_project_payment_path(payment.project,payment) , method: :delete, remote: true, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+          <%elsif current_user.manager?%>
+            <%= link_to '', manager_project_payment_path(payment.project,payment) , class: 'btn btn-primary fa fa-eye' %>
+            <%= link_to '', edit_manager_project_payment_path(payment.project,payment), remote: true , class: 'btn btn-primary fa fa-pencil' %>
+            <%= link_to '', manager_project_payment_path(payment.project,payment) , method: :delete, remote: true, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
+          <%end%>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <% @payments.each do |payment| %>
-        <tr>
-          <td><%= payment.payment %>$</td>
-          <td><%= payment.project.title %></td>
-          <td><%= payment.creater.name %></td>
-          <td>
-            <%if current_user.admin?%>
-              <%= link_to '', admin_project_payment_path(payment.project,payment) , class: 'btn btn-primary fa fa-eye' %>
-              <%= link_to '', edit_admin_project_payment_path(payment.project,payment), remote: true , class: 'btn btn-primary fa fa-pencil' %>
-              <%= link_to '', admin_project_payment_path(payment.project,payment) , method: :delete, remote: true, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
-            <%elsif current_user.manager?%>
-              <%= link_to '', manager_project_payments_path(payment.project,payment) , class: 'btn btn-primary fa fa-eye' %>
-              <%= link_to '', edit_manager_project_payment_path(payment.project,payment), remote: true , class: 'btn btn-primary fa fa-pencil' %>
-              <%= link_to '', manager_project_payment_path(payment.project,payment) , method: :delete, remote: true, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %></td>
-            <%end%>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%if current_user.admin?%>
-    <%= link_to fa_icon('plus-square', text: 'Add Payment'), new_admin_project_payment_path(@project) , remote: true, class: 'btn btn-primary' %>
-  <%elsif current_user.manager?%>
-     <%= link_to fa_icon('plus-square', text: 'Add Payment'), new_manager_project_payment_path(@project), remote: true , class: 'btn btn-primary' %>
-  <%end%>
+    <% end %>
+  </tbody>
+</table>
+<%if current_user.admin?%>
+  <%= link_to fa_icon('plus-square', text: 'Add Payment'), new_admin_project_payment_path(@project) , remote: true, class: 'btn btn-primary' %>
+<%elsif current_user.manager?%>
+   <%= link_to fa_icon('plus-square', text: 'Add Payment'), new_manager_project_payment_path(@project), remote: true , class: 'btn btn-primary' %>
+<%end%>
 <!-- Modal -->
 <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
 </div>

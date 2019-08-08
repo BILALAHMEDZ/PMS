@@ -2,11 +2,11 @@
 
 class Employee::ClientsController < ApplicationController
   def index
-    @clients = Client.search(params[:search]).order(:id).page(params[:page])
+    @clients = Client.search(params[:search]).page(params[:page])
   end
 
   def show
-    @client = Client.find_by_id(params[:id])
-    render file: 'public/404.html', status: :not_found, layout: false unless @client
+    @client = Client.find_by(id: params[:id])
+    return redirect_to root_path, alert: 'client not found' if @client.blank?
   end
 end

@@ -1,0 +1,10 @@
+<% if @comment.save %>
+  $('#comment-modal').modal('hide');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
+  <% @comments = @comment.commentable.comments.order(:id).reverse_order %>
+  $('#comment-index').empty();
+  $('#comment-index').append("<%= j render 'comments/comment', comment: @comment.commentable %>");
+<% else %>
+  $('#comment-errors').html("<%= j render 'errors', comment: @comment.commentable %>")
+<% end %>

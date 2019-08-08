@@ -19,8 +19,8 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.find_by_id(params[:id])
-    render file: 'public/404.html', status: :not_found, layout: false unless @user
+    @user = User.find_by(id: params[:id])
+    return redirect_to root_path, alert: 'User not found' if @user.blank?
   end
 
   def user_params

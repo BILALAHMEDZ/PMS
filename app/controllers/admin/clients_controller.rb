@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Admin::ClientsController < AdminBaseController
+  before_action :set_client, only: [:show, :edit, :update, :destroy]
   def index
-    @clients = Client.search(params[:search]).order(:id).page(params[:page])
+    @clients = Client.search(params[:search]).page(params[:page])
   end
 
   def new
@@ -10,7 +11,6 @@ class Admin::ClientsController < AdminBaseController
   end
 
   def show
-    find_user
   end
 
   def create
@@ -23,11 +23,9 @@ class Admin::ClientsController < AdminBaseController
   end
 
   def edit
-    find_user
   end
 
   def update
-    find_user
     if @client.update(client_params)
       redirect_to admin_clients_path, notice: 'Client was successfully updated.'
     else
@@ -36,16 +34,15 @@ class Admin::ClientsController < AdminBaseController
   end
 
   def destroy
-    find_user
     @client.destroy
     redirect_to admin_clients_path, notice: 'Client was successfully destroyed.'
   end
 
   private
 
-  def find_user
-    @client = Client.find_by_id(params[:id])
-    render file: 'public/404.html', status: :not_found, layout: false unless @client
+  def set_client
+    @client = Client.find_by(id: params[:id])
+    return redirect_to root_path, alert: 'client not found' if @client.blank?
   end
 
   def client_params

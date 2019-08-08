@@ -12,6 +12,6 @@ class Client < ApplicationRecord
       where('name LIKE (?) OR email LIKE (?)', "%#{search}%", "%#{search}%")
     else
       all
-    end
+    end.order(:id)
   end
 end

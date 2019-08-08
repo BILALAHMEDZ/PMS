@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Admin::UsersController < AdminBaseController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
-    @users = User.search(params[:search]).order(:created_at).page(params[:page]).all_except(current_user)
+    @users = User.search(params[:search]).page(params[:page]).all_except(current_user)
   end
 
   def new
@@ -10,7 +11,6 @@ class Admin::UsersController < AdminBaseController
   end
 
   def show
-    find_user
   end
 
   def create
@@ -24,11 +24,9 @@ class Admin::UsersController < AdminBaseController
   end
 
   def edit
-    find_user
   end
 
   def update
-    find_user
     if @user.update(user_params)
       redirect_to admin_users_path, notice: 'User was successfully updated.'
     else
@@ -37,16 +35,15 @@ class Admin::UsersController < AdminBaseController
   end
 
   def destroy
-    find_user
     @user.destroy
     redirect_to admin_users_path, notice: 'User was successfully destroyed.'
   end
 
   private
 
-  def find_user
-    @user = User.find_by_id(params[:id])
-    render file: 'public/404.html', status: :not_found, layout: false unless @user
+  def set_user
+    @user = User.find_by(id: params[:id])
+    return redirect_to root_path, alert: 'user not found' if @user.blank?
   end
 
   def create_params

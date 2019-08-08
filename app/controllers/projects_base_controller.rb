@@ -4,8 +4,10 @@ class ProjectsBaseController < ApplicationController
   before_action :set_timelogs, only: [:show]
   before_action :set_payments, only: [:show]
   before_action :set_comments, only: [:show]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :set_payments, :set_comments]
+
   def index
-    @projects = Project.search(params[:search]).order(:created_at).page(params[:page])
+    @projects = Project.search(params[:search]).page(params[:page])
   end
 
   def new
@@ -13,12 +15,12 @@ class ProjectsBaseController < ApplicationController
   end
 
   def show
-        @attachments = @project.attachments
-    @project = Project.find_by_id(params[:id])
+    @attachments = @project.attachments
     @comment = Comment.new
   end
 
   def create
+    #change
     @project = Project.new(project_params.except(:employees))
     @empls = project_params[:employees]
     @empls.shift
@@ -39,11 +41,9 @@ class ProjectsBaseController < ApplicationController
   end
 
   def edit
-    set_project
   end
 
   def update
-    set_project
     @empls = project_params[:employees]
     @abc = project_params.except(:employees)
     @empls.shift
@@ -62,7 +62,6 @@ class ProjectsBaseController < ApplicationController
   end
 
   def destroy
-    set_project
     @project.destroy
     redirect_to my_project, notice: 'Project was successfully destroyed.'
   end
@@ -70,23 +69,21 @@ class ProjectsBaseController < ApplicationController
   private
 
   def set_payments
-    set_project
-    @payments = @project.payments.order(:created_at).page(params[:page])
+    @payments = @project.payments.order(:created_at)
   end
 
   def set_timelogs
     set_project
-    @timelogs = @project.timelogs.order(:created_at).page(params[:page])
+    @timelogs = @project.timelogs.order(:created_at)
   end
 
   def set_comments
-    @project = Project.find_by_id(params[:id])
-    @comments = @project.comments.order(:id).page(params[:page])
+    @comments = @project.comments.order(:id).reverse_order
   end
 
   def set_project
-    @project = Project.find_by_id(params[:id])
-    render file: 'public/404.html', status: :not_found, layout: false unless @project
+    @project = Project.find_by(id: params[:id])
+    return redirect_to root_path, alert: 'Project not found' if @project.blank?
   end
 
   def project_params

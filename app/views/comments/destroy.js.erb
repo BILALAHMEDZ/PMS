@@ -1,4 +1,4 @@
-<% if @comment.save %>
+<% if @comment.destroy %>
   <% @comments = @comment.commentable.comments.order(:id).reverse_order %>
   $('#comment-index').empty();
   $('#comment-index').append("<%= j render 'comments/comment', comment: @comment.commentable %>");
