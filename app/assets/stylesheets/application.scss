@@ -20,7 +20,20 @@
 .chosen-container {
  width: 100% !important;
 }
+
 .scrollClass {
   height:150px;
   overflow-y: scroll;
+}
+
+.input-group-addon{
+  padding: .375rem .75rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: skyblue;
+  text-align: center;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
 }

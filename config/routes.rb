@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :clients
     resources :projects do
       resources :payments
-      resources :timelogs, only: %i[index]
+      resources :timelogs
     end
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
@@ -18,19 +18,20 @@ Rails.application.routes.draw do
       resources :payments
       resources :timelogs
     end
-
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
 
   namespace :employee do
-    resources :clients, only: %i[index show]
+    resources :clients
     resources :projects do
       resources :timelogs
     end
   end
+
   resources :projects do
     resources :attachments
   end
+
   post '/comments', to: 'comments#create'
   resources :attachments, only: [:destroy]
   root 'users#index'
