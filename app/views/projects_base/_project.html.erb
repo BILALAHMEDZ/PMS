@@ -1,14 +1,14 @@
-<% title "-All Projects" %>
-<div class="container">
+<% title '-All Projects' %>
+<div class='container'>
   <div>
     <%= form_tag project, method: 'get' do %>
       <%= text_field_tag :search, params[:search], class: 'form-control col-11 float-left', placeholder: 'Search By Title'%>
-      <%= submit_tag "Search", class: 'btn btn-primary float-right'%>
+      <%= submit_tag 'Search', class: 'btn btn-primary float-right'%>
     <%end%>
   </div>
-  <div class="clearfix mb-3"></div>
+  <div class='clearfix mb-3'></div>
   <div>
-  <table class="table table-striped" id="myTable">
+  <table class='table table-striped' id='myTable'>
     <thead>
       <tr>
         <th>Title</th>
@@ -66,6 +66,6 @@
   <%elsif current_user.manager?%>
      <%= link_to fa_icon('plus-square', text: 'Add Project'), new_manager_project_path , class: 'btn btn-primary' %>
   <%end%>
-  <div class = "clearfix mb-3"></div>
+  <div class = 'clearfix mb-3'></div>
   <%= paginate @projects %>
 </div>

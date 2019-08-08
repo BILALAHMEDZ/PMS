@@ -1,6 +1,6 @@
-<% title "-All Clients" %>
-<div class="container">
-  <table class="table table-striped" id="myTable">
+<% title '-All Clients' %>
+<div class='container'>
+  <table class='table table-striped' id='myTable'>
     <thead>
       <tr>
         <th><strong>Name</strong></th>
@@ -18,13 +18,13 @@
     </tbody>
   </table>
   <h1>Projects</h1>
-  <ul class="list-group">
+  <ul class='list-group'>
     <% @client.projects.each do |project| %>
-      <li class = "list-group-item list-group-item-success"><%= project.title %></li>
+      <li class = 'list-group-item list-group-item-success'><%= project.title %></li>
     <% end %>
   </ul>
-  <div class="clearfix mb-3"></div>
-  <div class="actions">
-    <%= link_to "Back", :back, class: 'btn btn-success' %>
+  <div class='clearfix mb-3'></div>
+  <div class='actions'>
+    <%= link_to 'Back', :back, class: 'btn btn-success' %>
   </div>
 </div>

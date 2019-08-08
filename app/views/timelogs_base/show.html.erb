@@ -1,10 +1,10 @@
-<% title "-Timelog" %>
-<div class="container">
-  <div class="row">
-    <div class="container">
-      <div class="shadow-lg p-3 mb-5 bg-white rounded ml-4">
+<% title '-Timelog' %>
+<div class='container'>
+  <div class='row'>
+    <div class='container'>
+      <div class='shadow-lg p-3 mb-5 bg-white rounded ml-4'>
           <h1>Timelogs</h1>
-          <table class="table table-striped" id="myTable">
+          <table class='table table-striped' id='myTable'>
             <thead>
               <tr>
                 <th><strong>Hours</strong></th>
@@ -18,27 +18,27 @@
                 </tr>
             </tbody>
           </table>
-      <div class="actions">
-          <%= link_to "Back", :back, class: 'btn btn-success' %>
+      <div class='actions'>
+          <%= link_to 'Back', :back, class: 'btn btn-success' %>
       </div>
       </div>
     </div>
   </div>
 
-<div class="row">
-  <div class="container">
-    <div class="shadow-lg p-3 mb-5 bg-white rounded ml-4">
+<div class='row'>
+  <div class='container'>
+    <div class='shadow-lg p-3 mb-5 bg-white rounded ml-4'>
       <h1>Comments</h1>
-      <div class=" col-md-12">
-          <div id="comment-index">
+      <div class=' col-md-12'>
+          <div id='comment-index'>
             <%= render 'comments/comment', comment: @comment, project: @project %>
           </div>
         <%= render '/comments/form', commentable_id: @timelog.id, commentable_type: 'Timelog'%>
       </div>
-      <div class = "clearfix mb-3"></div>
+      <div class = 'clearfix mb-3'></div>
     </div>
   </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+<div class='modal fade' id='comment-modal' tabindex='-1' role='dialog' aria-labelledby='paymentModalLabel' aria-hidden='true'>
 </div>

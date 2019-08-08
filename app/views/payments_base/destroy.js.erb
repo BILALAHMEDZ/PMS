@@ -1,3 +1,3 @@
 <% @payments = @project.payments.order(:id) %>;
 $('#payment-index').empty();
-$('#payment-index').append("<%= j render 'payments_base/payment', payments: @payments %>");
+$('#payment-index').append('<%= j render 'payments_base/payment', payments: @payments %>');

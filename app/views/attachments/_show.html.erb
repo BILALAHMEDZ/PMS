@@ -1,15 +1,15 @@
 <% attachment.attachments.each do |attachment| %>
- <ul class="media-list">
-   <li class="media">
-     <div class="media-body">
-        <span class="text-muted pull-right">
-          <%= link_to "Delete", attachment_path(attachment.id), data: { confirm: "Are you sure?" }, method: :delete, class: 'text-danger' %>
-        </span>
-          <a href=" <%= attachment.attachment %>" download="">
-         <%= attachment.attachment.file.filename %>
-        </a>
-     </div>
-   </li>
-   <hr>
- </ul>
+  <ul class='media-list'>
+    <li class='media'>
+      <div class='media-body'>
+         <span class='text-muted pull-right'>
+           <%= link_to 'Delete', attachment_path(attachment.id), data: { confirm: 'Are you sure?' }, method: :delete, class: 'text-danger' %>
+         </span>
+           <a href=' <%= attachment.attachment %>' download=''>
+          <%= attachment.attachment.file.filename %>
+         </a>
+      </div>
+    </li>
+    <hr>
+  </ul>
 <% end %>

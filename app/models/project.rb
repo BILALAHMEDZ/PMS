@@ -2,6 +2,7 @@
 
 class Project < ApplicationRecord
   paginates_per 5
+
   belongs_to :client
   has_many :payments, dependent: :destroy
   belongs_to :manager
@@ -10,7 +11,8 @@ class Project < ApplicationRecord
   belongs_to :creater, class_name: 'User'
   has_many :timelogs, dependent: :destroy
   has_and_belongs_to_many :employees, join_table: 'employees_projects'
-  validates :title, :hours_spent, :amount, presence: true
+
+  validates :title, presence: true, uniqueness: { case_sensitive: false }
 
   def self.search(search)
     if search

@@ -4,7 +4,7 @@
   $('.modal-backdrop').remove();
   <% @payments = @project.payments.order(:id) %>
   $('#payment-index').empty();
-  $('#payment-index').append("<%= j render 'payments_base/payment', payment: @payment, project: @project %>");
+  $('#payment-index').append('<%= j render 'payments_base/payment', payment: @payment, project: @project %>');
 <% else %>
-  $('#payment-errors').html("<%= j render 'errors', payment: @payment %>")
+  $('#payment-errors').html('<%= j render 'errors', payment: @payment %>')
 <% end %>

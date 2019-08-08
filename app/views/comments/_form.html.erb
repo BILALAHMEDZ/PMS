@@ -1,14 +1,14 @@
 <%= form_with(model: @comment, url: comments_url, class: 'form-vertical' , remote: true) do |f| %>
   <%= render 'errors', comment: @comment %>
-  <div class="field">
+  <div class='field'>
     <%= f.label :message %>
-    <%= f.text_field :message, class: "form-control"%>
+    <%= f.text_field :message, required: true, class: 'form-control'%>
   </div>
   <%= f.hidden_field :creater_id, value: current_user.id %>
   <%= f.hidden_field :commentable_id, value: commentable_id %>
   <%= f.hidden_field :commentable_type, value: commentable_type %>
-  <div class="clearfix mb-3"></div>
-  <div class="actions">
-    <%= f.submit "Create" ,class: "btn btn-primary"%>
+  <div class='clearfix mb-3'></div>
+  <div class='actions'>
+    <%= f.submit 'Create' ,class: 'btn btn-primary'%>
   </div>
 <% end %>

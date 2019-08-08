@@ -1,5 +1,5 @@
-<% title "-Add Project" %>
-<div class="container">
+<% title '-Add Project' %>
+<div class='container'>
   <%if current_user.admin?%>
     <%= render 'form', project: @project %>
   <%elsif current_user.manager?%>

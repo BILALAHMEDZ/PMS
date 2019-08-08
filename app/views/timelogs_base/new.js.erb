@@ -1,8 +1,8 @@
 <%if current_user.admin?%>
-  $("#timelog-modal").html("<%= j (render 'form', timelog: @timelog) %>");
-  $("#timelog-modal").modal('show');
+  $('#timelog-modal').html('<%= j (render 'form', timelog: @timelog) %>');
+  $('#timelog-modal').modal('show');
 <%elsif current_user.employee?%>
-  $("#timelog-modal").html("<%= j (render 'form1', timelog: @timelog) %>");
-  $("#timelog-modal").modal('show');
+  $('#timelog-modal').html('<%= j (render 'form1', timelog: @timelog) %>');
+  $('#timelog-modal').modal('show');
 <%end%>
 bind_chosen_select()

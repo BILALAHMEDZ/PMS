@@ -1,12 +1,12 @@
-<% title "-All Clients" %>
-<div class="container">
+<% title '-All Clients' %>
+<div class='container'>
   <div>
     <%= form_tag manager_clients_path, method: 'get' do %>
       <%= text_field_tag :search, params[:search], class: 'form-control col-11 float-left', placeholder: 'Search By Name OR Email'%>
-      <%= submit_tag "Search", class: 'btn btn-primary float-right'%>
+      <%= submit_tag 'Search', class: 'btn btn-primary float-right'%>
     <%end%>
   </div>
-  <table class="table table-striped" id="myTable">
+  <table class='table table-striped' id='myTable'>
     <thead>
       <tr>
         <th><strong>Name</strong></th>
@@ -31,6 +31,6 @@
     </tbody>
   </table>
   <%= link_to fa_icon('plus-square', text: 'Add Client'), new_manager_client_path , class: 'btn btn-primary' %>
-  <div class="clearfix mb-3"></div>
+  <div class='clearfix mb-3'></div>
   <%= paginate @clients %>
 </div>

@@ -1,8 +1,8 @@
 
 <%if current_user.admin?%>
-  $("#payment-modal").html("<%= j (render 'form', payment: @payment) %>");
-  $("#payment-modal").modal('show');
+  $('#payment-modal').html('<%= j (render 'form', payment: @payment) %>');
+  $('#payment-modal').modal('show');
 <%elsif current_user.manager?%>
-  $("#payment-modal").html("<%= j (render 'form1', payment: @payment) %>");
-  $("#payment-modal").modal('show');
+  $('#payment-modal').html('<%= j (render 'form1', payment: @payment) %>');
+  $('#payment-modal').modal('show');
 <%end%>
