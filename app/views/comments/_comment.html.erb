@@ -1,6 +1,7 @@
 <ul class='nav nav-pills nav-stacked scrollClass'>
 <% @comments.each do |comment| %>
   <li class='nav-item col-md-12 mb-2'>
+    <h6><%= comment.creater.name %>  (<%= comment.created_at.to_time.strftime('%B %e at %l:%M %p')%>)</h6>
     <span>
     <% if !comment.creater.image.blank?%>
       <%= image_tag(comment.creater.image.url, size: '40x40', alt: 'Edit Entry', class: 'float-left ml-3 rounded-circle') %>

@@ -14,7 +14,9 @@
      <%= submit_tag 'Search', class: 'btn btn-primary float-left ml-1'%>
     <%end%>
   </div>
-    <div class='clearfix mb-3'></div>
+  <div class='clearfix mb-3'></div>
+  <%= link_to fa_icon('plus-square', text: 'Add User'), new_admin_user_path, class: 'btn btn-primary' %>
+  <div class='clearfix mb-3'></div>
   <table class='table table-striped'>
     <thead>
       <tr>
@@ -41,7 +43,5 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to fa_icon('plus-square', text: 'Add User'), new_admin_user_path, class: 'btn btn-primary' %>
-  <div class = 'clearfix mb-3'></div>
   <%= paginate @users %>
 </div>

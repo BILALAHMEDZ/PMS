@@ -8,16 +8,6 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery
 
-  def after_sign_in_path_for(_resource)
-    if current_user.admin?
-      admin_projects_url
-    elsif current_user.manager?
-      manager_projects_url
-    elsif current_user.employee?
-      employee_projects_url
-    end
-  end
-
   protected
 
   def configure_permitted_parameters
@@ -29,14 +19,6 @@ class ApplicationController < ActionController::Base
 
   def unauthorized_user
     flash[:alert] = 'You are not authorized to perform this action.'
-    if current_user.admin?
-      return admin_projects_path
-    elsif current_user.manager?
-      return manager_projects_path
-    elsif current_user.employee?
-      return employee_projects_path
-    else
-      return root_url
-    end
+    redirect_to root_path
   end
 end

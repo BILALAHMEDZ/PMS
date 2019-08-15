@@ -7,6 +7,8 @@
     <%end%>
   </div>
   <div class = 'clearfix mb-3'></div>
+  <%= link_to fa_icon('plus-square', text: 'Add Client'), new_admin_client_path , class: 'btn btn-primary' %>
+  <div class = 'clearfix mb-3'></div>
   <table class='table table-striped' id='myTable'>
     <thead>
       <tr>
@@ -31,7 +33,5 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to fa_icon('plus-square', text: 'Add Client'), new_admin_client_path , class: 'btn btn-primary' %>
-  <div class = 'clearfix mb-3'></div>
   <%= paginate @clients %>
 </div>

@@ -1,3 +1,9 @@
+<%if current_user.admin?%>
+  <%= link_to fa_icon('plus-square', text: 'Add Timelog'), new_admin_project_timelog_path(@project), remote: true , class: 'btn btn-primary' %>
+<%elsif current_user.employee?%>
+  <%= link_to fa_icon('plus-square', text: 'Add Timelog'), new_employee_project_timelog_path(@project), remote: true , class: 'btn btn-primary' %>
+<%end%>
+<div class = 'clearfix mb-3'></div>
 <table class='table table-striped' id='myTable'>
   <thead>
     <tr>
@@ -28,11 +34,6 @@
     <% end %>
   </tbody>
 </table>
-<%if current_user.admin?%>
-  <%= link_to fa_icon('plus-square', text: 'Add Timelog'), new_admin_project_timelog_path(@project), remote: true , class: 'btn btn-primary' %>
-<%elsif current_user.employee?%>
-  <%= link_to fa_icon('plus-square', text: 'Add Timelog'), new_employee_project_timelog_path(@project), remote: true , class: 'btn btn-primary' %>
-<%end%>
 <!-- Modal -->
 <div class='modal fade' id='timelog-modal' tabindex='-1' role='dialog' aria-labelledby='paymentModalLabel' aria-hidden='true'>
 </div>

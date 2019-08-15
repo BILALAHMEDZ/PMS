@@ -1,0 +1,71 @@
+<% title '-All Projects' %>
+<div class='container'>
+  <div class='clearfix mb-3'></div>
+  <h1>Top Projects</h1>
+  <div class='clearfix mb-3'></div>
+  <table class='table table-striped' id='myTable'>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>hours_spent</th>
+        <th>Amount</th>
+        <th>Client</th>
+        <th>Manager</th>
+        <th>Created By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @index = 5 %>
+      <% @projects.reverse.each do |project| %>
+        <tr>
+          <% if @index == 0 %>
+            <% break %>
+          <% end %>
+          <% @index = @index-1 %>
+          <td><%= project.title %></td>
+          <td><%= project.description %></td>
+          <td><%= project.hours_spent %></td>
+          <td><%= project.amount %></td>
+          <td><%= project.client.name %></td>
+          <td><%= project.manager.name %></td>
+          <td><%= project.creater.name %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <div class='clearfix mb-3'></div>
+  <h1>Bottom Projects</h1>
+  <div class='clearfix mb-3'></div>
+  <div>
+  <table class='table table-striped' id='myTable'>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>hours_spent</th>
+        <th>Amount</th>
+        <th>Client</th>
+        <th>Manager</th>
+        <th>Created By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @index = 5 %>
+      <% @projects.each do |project| %>
+        <tr>
+          <% if @index == 0 %>
+            <% break %>
+          <% end %>
+          <% @index = @index-1 %>
+          <td><%= project.title %></td>
+          <td><%= project.description %></td>
+          <td><%= project.hours_spent %></td>
+          <td><%= project.amount %></td>
+          <td><%= project.client.name %></td>
+          <td><%= project.manager.name %></td>
+          <td><%= project.creater.name %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>

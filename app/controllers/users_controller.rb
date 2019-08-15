@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  def index; end
+  def index
+    @projects = Project.order(:amount)
+  end
 
   def profile_edit
     find_user
