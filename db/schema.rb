@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_806_135_306) do
+ActiveRecord::Schema.define(version: 20_190_809_091_855) do
   create_table 'attachments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
@@ -70,11 +70,11 @@ ActiveRecord::Schema.define(version: 20_190_806_135_306) do
   end
 
   create_table 'timelogs', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
-    t.string 'hours'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.bigint 'employee_id'
     t.bigint 'project_id'
+    t.decimal 'hours', precision: 10
     t.index ['employee_id'], name: 'index_timelogs_on_employee_id'
     t.index ['project_id'], name: 'index_timelogs_on_project_id'
   end

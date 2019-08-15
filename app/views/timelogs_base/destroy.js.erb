@@ -1,3 +1,7 @@
+<% @project.hours_spent -= @timelog.hours %>
+<% @project.update(hours_spent: @project.hours_spent)%>
 <% @timelogs = @project.timelogs.order(:id) %>;
 $('#timelog-index').empty();
 $('#timelog-index').append('<%= j render 'timelogs_base/timelog', timelogs: @timelogs %>');
+$('#project-index').empty();
+$('#project-index').append('<%= j render 'projects_base/show', project: @project %>');

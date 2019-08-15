@@ -19,6 +19,6 @@ class Project < ApplicationRecord
       where('title LIKE (?)', "%#{search}%")
     else
       all
-    end.order(:id)
+    end.order(:amount)
   end
 end

@@ -7,7 +7,9 @@ class ProjectsBaseController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy set_payments set_comments]
 
   def index
-    @projects = Project.search(params[:search]).page(params[:page])
+    return @projects = Project.search(params[:search]).page(params[:page]) if current_user.admin?
+    return @projects = Project.where('manager_id = ? OR creater_id = ?', current_user.id, current_user.id).search(params[:search]).page(params[:page]) if current_user.manager?
+    return @projects = current_user.projects.search(params[:search]).page(params[:page]) if current_user.employee?
   end
 
   def new

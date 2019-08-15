@@ -1,5 +1,11 @@
 <% title '-All Projects' %>
 <div class='container'>
+  <div>
+    <%= form_tag project, method: 'get' do %>
+      <%= text_field_tag :search, params[:search], class: 'form-control col-11 float-left', placeholder: 'Search By Title'%>
+      <%= submit_tag 'Search', class: 'btn btn-primary float-right'%>
+    <%end%>
+  </div>
   <div class='clearfix mb-3'></div>
   <div>
   <table class='table table-striped' id='myTable'>

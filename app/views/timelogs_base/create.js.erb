@@ -1,10 +1,14 @@
 <% if @timelog.save %>
+  <% @project.hours_spent += @timelog.hours %>
+  <% @project.update(hours_spent: @project.hours_spent)%>
   $('#timelog-modal').modal('hide');
   $('body').removeClass('modal-open');
   $('.modal-backdrop').remove();
   <% @timelogs = @project.timelogs.order(:id) %>
   $('#timelog-index').empty();
   $('#timelog-index').append('<%= j render 'timelogs_base/timelog', timelog: @timelog, project: @project %>');
+  $('#project-index').empty();
+  $('#project-index').append('<%= j render 'projects_base/show', project: @project %>');
 <% else %>
   $('#timelog-errors').html('<%= j render 'errors', timelog: @timelog %>')
 <% end %>

@@ -1,10 +1,13 @@
 <% if @payment.save %>
+  <% @project.update(amount: Payment.where(project_id: @project.id).sum(:payment))%>
   $('#payment-modal').modal('hide');
   $('body').removeClass('modal-open');
   $('.modal-backdrop').remove();
   <% @payments = @project.payments.order(:id) %>
   $('#payment-index').empty();
   $('#payment-index').append('<%= j render 'payments_base/payment', payment: @payment, project: @project %>');
+  $('#project-index').empty();
+  $('#project-index').append('<%= j render 'projects_base/show', project: @project %>');
 <% else %>
   $('#payment-errors').html('<%= j render 'errors', payment: @payment %>')
 <% end %>

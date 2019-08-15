@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(_resource)
     if current_user.admin?
-      admin_users_url
+      admin_projects_url
     elsif current_user.manager?
-      manager_clients_url
+      manager_projects_url
     elsif current_user.employee?
       employee_projects_url
     end
@@ -30,9 +30,9 @@ class ApplicationController < ActionController::Base
   def unauthorized_user
     flash[:alert] = 'You are not authorized to perform this action.'
     if current_user.admin?
-      return admin_clients_path
+      return admin_projects_path
     elsif current_user.manager?
-      return manager_clients_path
+      return manager_projects_path
     elsif current_user.employee?
       return employee_projects_path
     else

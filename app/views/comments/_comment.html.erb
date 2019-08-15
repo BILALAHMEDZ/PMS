@@ -1,7 +1,12 @@
 <ul class='nav nav-pills nav-stacked scrollClass'>
 <% @comments.each do |comment| %>
   <li class='nav-item col-md-12 mb-2'>
-    <span><%= image_tag('pms1.jpeg', size: '40x40', alt: 'Edit Entry', class: 'float-left ml-3') %>
+    <span>
+    <% if !comment.creater.image.blank?%>
+      <%= image_tag(comment.creater.image.url, size: '40x40', alt: 'Edit Entry', class: 'float-left ml-3 rounded-circle') %>
+    <% else %>
+        <%= image_tag('pms1.jpeg', size: '40x40', alt: 'Edit Entry', class: 'float-left ml-3') %>
+    <% end %>
     <a class='nav-link active col-9 ml-3 mr-3 float-left' href='#'><%= comment.message %></a></span>
     <% if current_user.id == comment.creater_id%>
       <%= link_to '', edit_comment_path(comment), remote: true, class: 'btn btn-primary fa fa-pencil' %>

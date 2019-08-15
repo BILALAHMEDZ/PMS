@@ -1,3 +1,7 @@
+<% @project.amount -= @payment.payment %>
+<% @project.update(amount: @project.amount)%>
 <% @payments = @project.payments.order(:id) %>;
 $('#payment-index').empty();
 $('#payment-index').append('<%= j render 'payments_base/payment', payments: @payments %>');
+$('#project-index').empty();
+$('#project-index').append('<%= j render 'projects_base/show', project: @project %>');

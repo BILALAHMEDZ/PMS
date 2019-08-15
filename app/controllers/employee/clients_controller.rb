@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Employee::ClientsController < ApplicationController
+class Employee::ClientsController < EmployeeBaseController
   def index
     @clients = Client.search(params[:search]).page(params[:page])
   end
