@@ -2,6 +2,7 @@
 
 class Admin::ProjectsController < ProjectsBaseController
   before_action :validate_admin
+
   def validate_admin
     return if current_user.admin?
 

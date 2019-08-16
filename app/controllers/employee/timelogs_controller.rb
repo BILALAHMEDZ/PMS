@@ -2,6 +2,7 @@
 
 class Employee::TimelogsController < TimelogsBaseController
   before_action :validate_employee
+
   def validate_employee
     return if current_user.employee?
 

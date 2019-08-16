@@ -2,6 +2,7 @@
 
 class Manager::ClientsController < ManagerBaseController
   before_action :set_client, only: %i[show edit update destroy]
+
   def index
     @clients = Client.search(params[:search]).page(params[:page])
   end

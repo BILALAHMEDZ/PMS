@@ -2,6 +2,7 @@
 
 class Admin::TimelogsController < TimelogsBaseController
   before_action :validate_admin
+
   def validate_admin
     return if current_user.admin?
 

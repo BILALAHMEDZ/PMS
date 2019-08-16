@@ -75,7 +75,9 @@ class ProjectsBaseController < ApplicationController
   end
 
   def set_timelogs
-    set_project
+    @project = Project.find_by(id: params[:id])
+    return redirect_to root_path, alert: 'Project not found' if @project.blank?
+
     @timelogs = @project.timelogs.order(:created_at)
   end
 

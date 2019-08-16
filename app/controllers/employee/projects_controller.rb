@@ -8,12 +8,4 @@ class Employee::ProjectsController < ProjectsBaseController
 
     redirect_to :root, alert: 'You are not allowed to access Employee'
   end
-
-  def index
-    super
-  end
-
-  def show
-    super
-  end
 end

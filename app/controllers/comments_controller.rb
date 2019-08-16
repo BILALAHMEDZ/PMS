@@ -2,6 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
+
   def index
     @comments = Comment.page(params[:page])
   end
