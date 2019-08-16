@@ -1,15 +1,19 @@
-<% attachment.attachments.each do |attachment| %>
-  <ul class='media-list'>
-    <li class='media'>
-      <div class='media-body'>
-         <span class='text-muted pull-right'>
-           <%= link_to 'Delete', attachment_path(attachment.id), data: { confirm: 'Are you sure?' }, method: :delete, class: 'text-danger' %>
-         </span>
-           <a href=' <%= attachment.attachment %>' download=''>
+<ul class='media-list scrollClass'>
+  <% attachment.attachments.each do |attachment| %>
+    <li class='media mt-4'>
+      <div class='media-body mt-2'>
+        <% if attachment.attachment.content_type =~ /image/ %>
+          <%= image_tag(attachment.attachment_url(), size: '40x40', alt: 'Edit Entry', class: 'float-left ml-3 rounded-circle mr-2') %>
+        <% else %>
+          <%= image_tag('file', size: '40x40', alt: 'Edit Entry', class: 'float-left ml-3 rounded-circle mr-2') %>
+        <% end %>
+        <span class='text-muted pull-right'>
+         <%= link_to 'Delete', attachment_path(attachment.id), data: { confirm: 'Are you sure?' }, method: :delete, class: 'text-danger mr-4' %>
+        </span>
+        <a href=' <%= attachment.attachment %>' download=''>
           <%= attachment.attachment.file.filename %>
-         </a>
+        </a>
       </div>
     </li>
-    <hr>
-  </ul>
-<% end %>
+  <% end %>
+</ul>

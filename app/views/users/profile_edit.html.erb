@@ -2,13 +2,13 @@
 <div class='container'>
   <%= form_with(model: @user, url: {action: 'profile_update'}, class: 'form-vertical' , local: true) do |f| %>
     <%= render 'errors', user: @user %>
-  <% if current_user.image.url.present? %>
-     <%= image_tag(current_user.image.url(:thumb).to_s, class: 'img-circle' ) %>
-   <% end %>
-   <div class='form-group'>
-     <%= f.label :image %>
-     <%= f.file_field :image, class: 'form-control' %>
-   </div>
+    <% if current_user.image.url.present? %>
+      <%= image_tag(current_user.image.url(:thumb).to_s, size: '60x60', class: 'rounded-circle' ) %>
+    <% end %>
+    <div class = 'clearfix mb-3'></div>
+    <div class='form-group'>
+      <%= f.file_field :image, class: 'form-control' %>
+    </div>
     <div class='field'>
       <%= f.label :name %>
       <%= f.text_field :name, required: true, class: 'form-control'%>

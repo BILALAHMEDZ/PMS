@@ -53,17 +53,14 @@
     <div class='clearfix mb-3'></div>
     <div class='clearfix mb-3'></div>
     <div class='container'>
-      <% flash.each do |key, value| %>
-        <% alert_class = case key
-                         when :notice then "success"
-                         when :alert then "danger"
-                         else key
-                         end %>
-        <%= content_tag :div, class: "alert alert-info alert-#{alert_class}" do %>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= value %>
-        <% end %>
+    <% flash.each do |name, msg| %>
+      <% if msg.is_a?(String) %>
+        <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        </div>
       <% end %>
+    <% end %>
     </div>
     <%= yield %>
   </body>
