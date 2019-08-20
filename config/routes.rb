@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   namespace :manager do
     resources :clients
     resources :projects do
-      resources :payments
-      resources :timelogs, only: [:index]
+      resources :payments, except: %i[index]
+      resources :timelogs, except: %i[index]
     end
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
@@ -15,8 +15,8 @@ Rails.application.routes.draw do
     resources :clients
     resources :users
     resources :projects do
-      resources :payments
-      resources :timelogs
+      resources :payments, except: %i[index]
+      resources :timelogs, except: %i[index]
     end
     get 'employee/:id/assigned_employees', to: 'projects#assigned_employees', as: :assigned_employees
   end
@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       end
       resources :clients, only: %i[index show]
       resources :users, only: %i[index show]
+      resources :comments, only: %i[index show]
     end
   end
 

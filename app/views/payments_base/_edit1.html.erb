@@ -9,8 +9,8 @@
     <div class='modal-body'>
       <div class='container'>
         <%= form_with(model: payment, url: manager_project_payment_path(payment.project.id,@payment), remote: true) do |form| %>
-            <div id='payment_errors'>
-            </div>
+          <div id='payment_errors'>
+          </div>
           <div class='form-group'>
             <%= form.label :payment %>
             <%= form.text_field :payment, required: true, class: 'form-control' %>

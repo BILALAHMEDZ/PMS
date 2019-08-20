@@ -42,6 +42,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 gem 'carrierwave', '~> 0.10.0'
+gem 'chartkick'
 gem 'chosen-rails'
 gem 'fast_jsonapi'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'

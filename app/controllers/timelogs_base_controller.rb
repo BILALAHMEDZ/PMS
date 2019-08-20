@@ -3,15 +3,13 @@
 class TimelogsBaseController < ApplicationController
   before_action :set_comments, only: [:show]
   before_action :set_timelog, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[index new edit update create]
 
   def index
-    @project = Project.find_by(id: params[:project_id])
-    render file: 'public/404.html', status: :not_found, layout: false unless @project
-    @timelogs = @project.timelogs
+    @timelogs = @project.timelogs.includes(:comments).order(:id)
   end
 
   def new
-    @project = Project.find(params[:project_id])
     @timelog = Timelog.new
   end
 
@@ -20,7 +18,6 @@ class TimelogsBaseController < ApplicationController
   end
 
   def create
-    @project = Project.find(params[:project_id])
     @timelog = @project.timelogs.new(timelog_params)
     respond_to do |format|
       format.js
@@ -28,7 +25,6 @@ class TimelogsBaseController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:project_id])
     respond_to do |format|
       format.js
     end
@@ -36,7 +32,6 @@ class TimelogsBaseController < ApplicationController
 
   def update
     @timelog.assign_attributes(timelog_params)
-    @project = Project.find(params[:project_id])
     respond_to do |format|
       format.js
     end
@@ -59,6 +54,11 @@ class TimelogsBaseController < ApplicationController
 
   def timelog_params
     params.require(:timelog).permit(:hours, :employee_id)
+  end
+
+  def set_project
+    @project = Project.find_by(id: params[:project_id])
+    return redirect_to root_path, alert: 'Project not found' if @project.blank?
   end
 
   def set_comments

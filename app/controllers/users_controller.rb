@@ -2,7 +2,8 @@
 
 class UsersController < ApplicationController
   def index
-    @projects = Project.order(:amount)
+    @top_projects = Project.top_projects
+    @bottom_projects = Project.bottom_projects
   end
 
   def profile_edit

@@ -1,4 +1,4 @@
-<% title '-Edit Client' %>\
+<% title '-Edit Client' %>
 <div class='container'>
   <%= form_with(model: @client, url: {action: 'update'}, class: 'form-vertical' , local: true) do |f| %>
     <%= render 'errors', client: @client %>

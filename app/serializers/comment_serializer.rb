@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class TimelogSerializer
+class CommentSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :hours
+  attributes :message, :commentable_type
 end

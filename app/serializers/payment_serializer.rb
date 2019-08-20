@@ -2,5 +2,6 @@
 
 class PaymentSerializer
   include FastJsonapi::ObjectSerializer
+
   attributes :payment
 end

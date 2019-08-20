@@ -3,15 +3,13 @@
 class PaymentsBaseController < ApplicationController
   before_action :set_comments, only: [:show]
   before_action :set_payment, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[index new edit update create]
 
   def index
-    @project = Project.find_by(id: params[:project_id])
-    render file: 'public/404.html', status: :not_found, layout: false unless @project
-    @payments = @project.payments.order(:id).page(params[:page])
+    @payments = @project.payments.includes(:comments).order(:id)
   end
 
   def new
-    @project = Project.find(params[:project_id])
     @payment = Payment.new
   end
 
@@ -20,7 +18,6 @@ class PaymentsBaseController < ApplicationController
   end
 
   def create
-    @project = Project.find(params[:project_id])
     @payment = @project.payments.new(payment_params)
     respond_to do |format|
       format.js
@@ -28,7 +25,6 @@ class PaymentsBaseController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:project_id])
     respond_to do |format|
       format.js
     end
@@ -36,7 +32,6 @@ class PaymentsBaseController < ApplicationController
 
   def update
     @payment.assign_attributes(payment_params)
-    @project = Project.find(params[:project_id])
     respond_to do |format|
       format.js
     end
@@ -60,6 +55,11 @@ class PaymentsBaseController < ApplicationController
   def set_payment
     @payment = Payment.find_by(id: params[:id])
     return redirect_to root_path, alert: 'Payment not found' if @payment.blank?
+  end
+
+  def set_project
+    @project = Project.find_by(id: params[:project_id])
+    return redirect_to root_path, alert: 'Project not found' if @project.blank?
   end
 
   def payment_params

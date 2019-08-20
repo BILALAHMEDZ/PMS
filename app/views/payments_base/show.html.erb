@@ -30,9 +30,9 @@
       <div class='shadow-lg p-3 mb-5 bg-white rounded ml-4'>
         <h1>Comments</h1>
         <div class=' col-md-12'>
-            <div id='comment-index'>
-              <%= render 'comments/comment', comment: @comment, project: @project %>
-            </div>
+          <div id='comment-index'>
+            <%= render 'comments/comment', comment: @comment, project: @project %>
+          </div>
           <%= render '/comments/form', commentable_id: @payment.id, commentable_type: 'Payment'%>
         </div>
         <div class = 'clearfix mb-3'></div>

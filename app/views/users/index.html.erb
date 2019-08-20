@@ -16,13 +16,8 @@
       </tr>
     </thead>
     <tbody>
-      <% @index = 5 %>
-      <% @projects.reverse.each do |project| %>
+      <% @top_projects.each do |project| %>
         <tr>
-          <% if @index == 0 %>
-            <% break %>
-          <% end %>
-          <% @index = @index-1 %>
           <td><%= project.title %></td>
           <td><%= project.description %></td>
           <td><%= project.hours_spent %></td>
@@ -35,6 +30,7 @@
     </tbody>
   </table>
   <div class='clearfix mb-3'></div>
+
   <h1>Bottom Projects</h1>
   <div class='clearfix mb-3'></div>
   <div>
@@ -51,13 +47,8 @@
       </tr>
     </thead>
     <tbody>
-      <% @index = 5 %>
-      <% @projects.each do |project| %>
+      <% @bottom_projects.each do |project| %>
         <tr>
-          <% if @index == 0 %>
-            <% break %>
-          <% end %>
-          <% @index = @index-1 %>
           <td><%= project.title %></td>
           <td><%= project.description %></td>
           <td><%= project.hours_spent %></td>
@@ -69,3 +60,11 @@
     <% end %>
     </tbody>
   </table>
+
+  <h1>Chart for Earnings</h1>
+  <div class='clearfix mb-3'></div>
+  <%= line_chart earnings_per_month, prefix: '$' ,xtitle: 'Projects', ytitle: 'Amounts' %>
+  <h1>Chart for Hours_Spent</h1>
+  <div class='clearfix mb-3'></div>
+  <%= line_chart hours_spent_per_month, xtitle: 'Projects', ytitle: 'Hours' %>
+</div>
