@@ -6,11 +6,11 @@ class UsersController < ApplicationController
   end
 
   def profile_edit
-    find_user
+    set_user
   end
 
   def profile_update
-    find_user
+    set_user
     if @user.update(user_params)
       redirect_to edit_profile_path, notice: 'User was successfully updated.'
     else
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   private
 
-  def find_user
+  def set_user
     @user = User.find_by(id: params[:id])
     return redirect_to root_path, alert: 'User not found' if @user.blank?
   end

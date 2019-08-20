@@ -21,7 +21,7 @@
     </div>
     <div class='clearfix mb-3'></div>
     <div class='field'>
-      <%= f.select :employees,
+      <%= f.select :employee_ids,
       Employee.all.map { |u| [u.name, u.id]},{:selected => @project.employees.pluck(:id)},
       { multiple: true, class: 'chosen-select' }%>
     </div>

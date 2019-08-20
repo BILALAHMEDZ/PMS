@@ -8,8 +8,4 @@ class Manager::PaymentsController < PaymentsBaseController
 
     redirect_to :root, alert: 'You are not allowed to access Manager'
   end
-
-  def my_payment
-    manager_project_payments_path
-  end
 end

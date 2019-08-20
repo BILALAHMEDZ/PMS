@@ -9,7 +9,7 @@ class Manager::ProjectsController < ProjectsBaseController
     redirect_to :root, alert: 'You are not allowed to access Manager'
   end
 
-  def my_project
+  def set_path
     manager_projects_path
   end
 end

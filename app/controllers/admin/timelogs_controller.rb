@@ -8,8 +8,4 @@ class Admin::TimelogsController < TimelogsBaseController
 
     redirect_to :root, alert: 'You are not allowed to access Admin'
   end
-
-  def my_timelog
-    admin_project_timelogs_path
-  end
 end

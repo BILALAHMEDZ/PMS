@@ -32,6 +32,19 @@ Rails.application.routes.draw do
     resources :attachments, only: %i[new index destroy]
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :projects do
+        resources :payments, only: %i[index show]
+        resources :timelogs, only: %i[index show]
+      end
+      resources :clients, only: %i[index show]
+      resources :users, only: %i[index show]
+    end
+  end
+
+  post '/auth/login', to: 'authentication#login'
+
   post '/comments', to: 'comments#create'
   root 'users#index'
   devise_for :users

@@ -14,7 +14,11 @@ class Project < ApplicationRecord
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }
 
-  def self.search(search)
+  def self.search(search, current_user)
+    return @projects = current_user.projects if current_user.employee?
+    return @projects = Project.all if current_user.admin?
+    return @projects = Project.where('manager_id = ? OR creater_id = ?', current_user.id, current_user.id) if current_user.manager?
+
     if search
       where('title LIKE (?)', "%#{search}%")
     else

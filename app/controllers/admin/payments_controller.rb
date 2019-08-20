@@ -8,8 +8,4 @@ class Admin::PaymentsController < PaymentsBaseController
 
     redirect_to :root, alert: 'You are not allowed to access Admin'
   end
-
-  def my_payment
-    admin_project_payments_path
-  end
 end

@@ -8,8 +8,4 @@ class Employee::TimelogsController < TimelogsBaseController
 
     redirect_to :root, alert: 'You are not allowed to access Employee'
   end
-
-  def my_timelog
-    employee_project_timelogs_path
-  end
 end
