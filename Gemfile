@@ -49,7 +49,6 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem 'jquery-rails'
 gem 'jwt'
 gem 'kaminari'
-gem 'pundit'
 gem 'rmagick'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

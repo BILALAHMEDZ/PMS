@@ -30,6 +30,9 @@ class ProjectsBaseController < ApplicationController
 
   def assigned_employees
     set_project
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit; end

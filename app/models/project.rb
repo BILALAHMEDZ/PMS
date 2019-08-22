@@ -5,7 +5,7 @@ class Project < ApplicationRecord
 
   belongs_to :client
   has_many :payments, dependent: :destroy
-  belongs_to :manager
+  belongs_to :manager, class_name: 'User'
   has_many :attachments, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :creater, class_name: 'User'
@@ -15,15 +15,17 @@ class Project < ApplicationRecord
   validates :title, presence: true, uniqueness: { case_sensitive: false }
 
   def self.search(search, current_user)
-    return @projects = current_user.projects.includes(:comments, :timelogs, :attachments) if current_user.employee?
-    return @projects = Project.includes(:payments, :comments, :timelogs, :attachments) if current_user.admin?
-    return @projects = Project.includes(:payments, :comments, :timelogs, :attachments).where('manager_id = ? OR creater_id = ?', current_user.id, current_user.id) if current_user.manager?
+    projects =
+      if current_user.admin?
+        Project.includes(:payments, :comments, :timelogs, :attachments)
+      elsif current_user.manager?
+        Project.includes(:payments, :comments, :timelogs, :attachments).where('manager_id = ? OR creater_id = ?', current_user.id, current_user.id)
+      elsif current_user.employee?
+        current_user.projects.includes(:comments, :timelogs, :attachments)
+      end
 
-    if search
-      where('title LIKE (?)', "%#{search}%")
-    else
-      all
-    end.order(:amount)
+    projects = projects.where('title LIKE (?)', "%#{search}%") if search
+    projects.order(:amount)
   end
 
   def self.top_projects

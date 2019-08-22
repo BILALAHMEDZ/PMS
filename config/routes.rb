@@ -29,8 +29,9 @@ Rails.application.routes.draw do
   end
 
   resources :projects, except: %i[index new show destroy edit update create] do
-    resources :attachments, only: %i[new index destroy]
+    resources :attachments, only: %i[new index create]
   end
+  resources :attachments, only: %i[destroy]
 
   namespace :api do
     namespace :v1 do

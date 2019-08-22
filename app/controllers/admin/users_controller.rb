@@ -4,7 +4,8 @@ class Admin::UsersController < AdminBaseController
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
-    @users = User.search(params[:search]).page(params[:page]).all_except(current_user)
+    search_attributes = params.permit(:search, :status, :type)
+    @users = User.search(search_attributes).page(params[:page]).all_except(current_user)
   end
 
   def new

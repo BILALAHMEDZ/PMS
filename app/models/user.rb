@@ -30,35 +30,36 @@ class User < ApplicationRecord
   after_initialize :init_default
 
   def admin?
-    type == 'Admin'
+    type == TYPE_ADMIN
   end
 
   def employee?
-    type == 'Employee'
+    type == TYPE_EMPLOYEE
   end
 
   def manager?
-    type == 'Manager'
+    type == TYPE_MANAGER
   end
 
   def active_for_authentication?
-    super && status == 'Enabled'
+    super && status == STATUS_ENABLED
   end
 
-  def self.search(search)
-    if search
-      where('name LIKE (?) OR email LIKE (?) OR type LIKE (?) OR status LIKE (?)', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
-    else
-      all
-    end.order(:id)
+  def self.search(search_attributes = {})
+    term = search_attributes[:search]
+
+    users = self
+    users = where('name LIKE (?) OR email LIKE (?)', "%#{term}%", "%#{term}%") if term.present?
+    users = users.where(type: search_attributes[:type]) if search_attributes[:type].present?
+    users = users.where(status: search_attributes[:status]) if search_attributes[:status].present?
+
+    users.order(:id)
   end
 
   private
 
   def init_default
-    if new_record?
-      self.status = STATUS_ENABLED
-      self.type = TYPE_EMPLOYEE
-    end
+    self.status = STATUS_ENABLED if new_record?
+    self.type = TYPE_EMPLOYEE if new_record?
   end
 end

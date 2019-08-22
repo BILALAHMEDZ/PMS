@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require "#{Rails.root}/lib/json_web_token.rb"
 class AuthenticationController < ApiController
-  before_action :authorize_request, except: :login
+  skip_before_action :authorize_request
 
   def login
     @user = User.find_by_email(params[:email])

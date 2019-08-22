@@ -17,7 +17,7 @@
           </div>
           <div class='clearfix mb-3'></div>
           <div class='field'>
-           <%= f.select :employee_id, ('<option value=''>Select Employee</option>' + options_from_collection_for_select(Employee.all, :id, :name, :selected => f.object.employee_id)).html_safe, {}, { id: 'choose-employee', :class => 'chosen-select'} %>
+           <%= f.select :employee_id, ('<option value=''>Select Employee</option>' + options_from_collection_for_select(Employee.all, :id, :name, selected: f.object.employee_id)).html_safe, {}, { id: 'choose-employee', class: 'chosen-select'} %>
           </div>
           <div class='clearfix mb-3'></div>
           <div class='actions'>

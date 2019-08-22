@@ -8,4 +8,3 @@ $( document ).ready(function() {
     return confirm("Are you Sure about the ROLE??");
   });
 });
-

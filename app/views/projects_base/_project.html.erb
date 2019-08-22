@@ -43,14 +43,14 @@
               <%= link_to '', admin_project_path(project) , class: 'btn btn-primary fa fa-eye' %>
               <%= link_to '', edit_admin_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
               <%= link_to '', admin_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
-              <%= link_to '', admin_assigned_employees_path(project) , class: 'btn btn-primary fa fa-group' %>
+              <%= link_to '', admin_assigned_employees_path(project), remote: true , class: 'btn btn-primary fa fa-group' %>
             </td>
           <%elsif current_user.manager?%>
             <td>
               <%= link_to '', manager_project_path(project) , class: 'btn btn-primary fa fa-eye' %>
               <%= link_to '', edit_manager_project_path(project) , class: 'btn btn-primary fa fa-pencil' %>
               <%= link_to '', manager_project_path(project) , method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger fa fa-trash-o' , id: 'delete' %>
-              <%= link_to '', manager_assigned_employees_path(project) , class: 'btn btn-primary fa fa-group' %>
+              <%= link_to '', manager_assigned_employees_path(project), remote: true , class: 'btn btn-primary fa fa-group' %>
             </td>
           <% end %>
         </tr>
@@ -60,4 +60,7 @@
 
   <div class = 'clearfix mb-3'></div>
   <%= paginate @projects %>
+</div>
+<!-- Modal -->
+<div class='modal fade' id='employee-modal' tabindex='-1' role='dialog' aria-labelledby='paymentModalLabel' aria-hidden='true'>
 </div>

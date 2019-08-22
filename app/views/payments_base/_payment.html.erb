@@ -17,7 +17,7 @@
     <tbody>
       <% @payments.each do |payment| %>
         <tr>
-          <td><%= payment.payment %>$</td>
+          <td>$<%= payment.payment %></td>
           <td><%= payment.project.title %></td>
           <td><%= payment.creater.name %></td>
           <td>

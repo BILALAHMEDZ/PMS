@@ -2,10 +2,10 @@
 
 module UsersHelper
   def earnings_per_month
-    Project.where({ created_at: (Time.now - 1.month)..Time.now }).group(:title).sum(:amount)
+    Payment.select({ created_at: (Time.now - 1.month)..Time.now }).group(:payment).sum(:payment)
   end
 
   def hours_spent_per_month
-    Project.where({ created_at: (Time.now - 1.month)..Time.now }).group(:title).sum(:hours_spent)
+    Timelog.select({ created_at: (Time.now - 1.month)..Time.now }).group(:hours).sum(:hours)
   end
 end
