@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::CommentsController < ApiController
-  before_action :authorize_request, except: :create
+  before_action :set_comment, only: %i[show]
 
   def index
     @comments = Comment.all
@@ -10,7 +10,6 @@ class Api::V1::CommentsController < ApiController
   end
 
   def show
-    set_comment
     render json: { status: 'SUCCESS', message: 'Loaded Comment', data: @comment }, status: :ok
   end
 
@@ -18,6 +17,6 @@ class Api::V1::CommentsController < ApiController
 
   def set_comment
     @comment = Comment.find_by(id: params[:id])
-    return redirect_to root_path, alert: 'Comment not found' if @comment.blank?
+    return render json: { message: 'comment not found' }, status: :not_found if @comment.blank?
   end
 end

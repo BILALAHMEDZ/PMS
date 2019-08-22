@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require "#{Rails.root}/lib/json_web_token.rb"
+
 class ApiController < ActionController::API
+  before_action :authorize_request
+
   def not_found
     render json: { error: 'not_found' }
   end
@@ -8,6 +12,7 @@ class ApiController < ActionController::API
   def authorize_request
     header = request.headers['Authorization']
     header = header.split(' ').last if header
+
     begin
       @decoded = JsonWebToken.decode(header)
       @current_user = User.find(@decoded[:user_id])

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::ClientsController < ApiController
-  before_action :authorize_request, except: :create
+  before_action :set_client, only: %i[show]
 
   def index
     @clients = Client.search(params[:search])
@@ -10,7 +10,6 @@ class Api::V1::ClientsController < ApiController
   end
 
   def show
-    set_client
     render json: { status: 'SUCCESS', message: 'Loaded client', data: @client }, status: :ok
   end
 
@@ -18,6 +17,6 @@ class Api::V1::ClientsController < ApiController
 
   def set_client
     @client = Client.find_by(id: params[:id])
-    return redirect_to root_path, alert: 'client not found' if @client.blank?
+    return render json: { message: 'Client not found' }, status: :not_found if @client.blank?
   end
 end
