@@ -4,7 +4,7 @@ class Api::V1::ClientsController < ApiController
   before_action :set_client, only: %i[show]
 
   def index
-    @clients = Client.search(params[:search])
+    @clients = Client.search(params[:search]).page(params[:page])
     json_string = ClientSerializer.new(@clients).serialized_json
     render json: json_string
   end

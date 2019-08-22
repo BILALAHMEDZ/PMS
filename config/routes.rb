@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       end
       resources :clients, only: %i[index show]
       resources :users, only: %i[index show]
+      resource :users, only: %i[update]
       resources :comments, only: %i[index show]
     end
   end

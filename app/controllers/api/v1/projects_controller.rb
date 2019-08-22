@@ -5,7 +5,7 @@ class Api::V1::ProjectsController < ApiController
   before_action :set_project, only: %i[show destroy update]
 
   def index
-    @projects = Project.search(params[:search], current_user)
+    @projects = paginate Project.search(params[:search], current_user)
     json_string = ProjectSerializer.new(@projects).serialized_json
     render json: json_string
   end

@@ -14,11 +14,28 @@ class Api::V1::UsersController < ApiController
     render json: { status: 'SUCCESS', message: 'Loaded user', data: @user }, status: :ok
   end
 
+  def update
+    @user = current_user
+    if @user.update(user_params)
+      render json: { status: 'SUCCESS', message: 'Updated User', data: @user }, status: :ok
+    else
+      render json: { status: 'ERROR', message: 'User not updated', data: @user.errors }, status: :unprocessable_entity
+    end
+  end
+
   private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :image)
+  end
 
   def set_user
     @user = User.find_by(id: params[:id])
     return render json: { message: 'User not found' }, status: :not_found if @user.blank?
+  end
+
+  def klass
+    @user.class
   end
 
   def authorize_user
