@@ -8,7 +8,7 @@
           <%= image_tag('file', size: '40x40', alt: 'Edit Entry', class: 'float-left ml-3 rounded-circle mr-2') %>
         <% end %>
         <span class='text-muted pull-right'>
-         <%= link_to 'Delete', project_attachment_path(attachment.id), data: { confirm: 'Are you sure?' }, method: :delete, class: 'text-danger mr-4' %>
+         <%= link_to 'Delete', attachment_path(attachment.id), data: { confirm: 'Are you sure?' }, method: :delete, class: 'text-danger mr-4' %>
         </span>
         <a href=' <%= attachment.attachment %>' download=''>
           <%= attachment.attachment.file.filename %>
